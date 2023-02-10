@@ -5,13 +5,13 @@ import Navbar from './components/Navbar'
 import Home from './pages/Home';
 import Collection from './pages/Collection';
 import Product from './pages/Product'
-import menu from '../public/menu-white.png'
-import eye from '../public/eye-white.png'
-import account from '../public/account-white.png'
-import search from '../public/search-white.png'
-import cart from '../public/cart-white.png'
-import close from '../public/close-white.png'
-import arrow from '../public/arrow-white.png'
+import menu from '/src/icons/menu-white.png'
+import eye from '/src/icons/eye-white.png'
+import account from '/src/icons/account-white.png'
+import search from '/src/icons/search-white.png'
+import cart from '/src/icons/cart-white.png'
+import close from '/src/icons/close-white.png'
+import arrow from '/src/icons/arrow-white.png'
 
 export default function App(){
   const [data, setData] = useState({ backgrounds: [], collections: [], products: [] })

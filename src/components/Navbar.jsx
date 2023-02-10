@@ -20,10 +20,10 @@ export default function Navbar(props){
         <nav className=" z-50 fixed bg-black">
         <div className="h-[50px] px-5 items-center flex w-[100vw]">
             <button className="w-[20px]"><img src={props.menu} onClick={toggleMenu} alt="" /></button>
-            <Link href="">
+            <Link to={'/'}>
                 <img className="w-[37px] ml-5" src={props.eye} alt="" />
             </Link>
-            <Link className="ml-auto" href="/customer">
+            <Link className="ml-auto" to={""}>
                 <img className="w-[22px]" src={props.account} alt="" />
             </Link>
             <button><img className="w-[24px] mx-5" src={props.search} alt="" /></button>
