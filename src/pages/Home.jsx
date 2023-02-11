@@ -4,7 +4,7 @@ export default function Home({backgrounds}){
     const randomBackground = backgrounds[randomIndex];
     return(
         <div className="" key={randomBackground?.id}>
-            <Link to={'/collection/new'}>
+            <Link to={'/new'}>
             <video className="h-screen w-screen object-cover" src={randomBackground?.image.url}  autoPlay loop muted alt="" />
             </Link>
         </div>

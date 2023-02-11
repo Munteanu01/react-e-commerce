@@ -36,7 +36,7 @@ export default function Navbar(props){
             </button>
         </div>
 
-        <div className={`${ menuIsOpen ? "left-[0px]" : "left-[-300px]"} md:pl-[40px] pl-[20px] pr-5 block absolute w-[260px] h-[100vh] inset-0 bg-black transition-all duration-[350ms] ease-in-out`}>
+        <div className={`${ menuIsOpen ? "left-[0px]" : "left-[-350px]"} md:pl-[40px] pl-[20px] pr-5 block absolute w-[260px] h-[100vh] inset-0 bg-black transition-all ease-in-out`}>
             <button className="flex w-[20px] pt-[18px] ml-auto">
                 <img src={props.close} onClick={toggleMenu} alt="" />
             </button>
@@ -44,7 +44,7 @@ export default function Navbar(props){
             {collections.map((collection) => (
                 <div className="items-center"  key={collection.id}>
                     <div className="flex justify-between ">
-                        <Link to={`/collection/${collection.slug}`}>
+                        <Link to={`/${collection.slug}`} onClick={toggleMenu}>
                         <h1>{collection.name}</h1>
                         </Link>
                         {collection.categories.length !== 0 && (
@@ -54,7 +54,9 @@ export default function Navbar(props){
                     </div>
                     <div className={ collectionStates[collection.id] ? "block" : "hidden"}>
                         {collection.categories.map((category) => (
-                            <h1 className="pl-5" key={category}>{category}</h1>
+                            <Link to={`/${collection.slug}/${category}`} onClick={toggleMenu} key={category}>
+                            <h1 className="pl-5" >{category.toUpperCase()}</h1>
+                            </Link>
                         ))}
                     </div>
                 </div>
