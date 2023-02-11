@@ -41,8 +41,10 @@ export default function Navbar(props){
                 <img src={props.close} onClick={toggleMenu} alt="" />
             </button>
             <div className="pt-40 leading-9 font-bold text-white">
+            <Link to={'/new'} onClick={toggleMenu}>NEW</Link>
             {collections.map((collection) => (
                 <div className="items-center"  key={collection.id}>
+                    
                     <div className="flex justify-between ">
                         <Link to={`/${collection.slug}`} onClick={toggleMenu}>
                         <h1>{collection.name}</h1>
@@ -52,6 +54,7 @@ export default function Navbar(props){
                             <img className="w-[18px] h-[15px] mb-[4px]" src={props.arrow} alt="" />
                         </button>)}
                     </div>
+
                     <div className={ collectionStates[collection.id] ? "block" : "hidden"}>
                         {collection.categories.map((category) => (
                             <Link to={`/${collection.slug}/${category}`} onClick={toggleMenu} key={category}>

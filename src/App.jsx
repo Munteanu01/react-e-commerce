@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar'
 import Home from './pages/Home';
+import New from './pages/New';
 import Collection from './pages/Collection';
 import Product from './pages/Product'
 import menu from '/src/icons/menu-white.png'
@@ -28,24 +29,17 @@ export default function App(){
           slug,
           name,
           categories,
-          products{
-            id,
-            slug,
-            name,
-            price,
-            categories,
-            collections{
-              name
-            }
-            image{ url }
-          }
+          products { name }
         },
         products{
           id,
           slug,
           name,
           price,
+          new,
+          categories,
           image{ url }
+          collections { name }
         }
       }`
       setData(await hygraph.request(query))
@@ -58,7 +52,8 @@ export default function App(){
       <Navbar collections={data.collections} menu={menu} eye={eye} close={close}account={account} search={search} cart={cart} arrow={arrow}/>
       <Routes>
         <Route path='*' element={<Home backgrounds={data.backgrounds} />} />
-        <Route path='/:slug/:category?' element={<Collection collections={data.collections}/>} />
+        <Route path='/new' element={<New products={data.products}/>} />
+        <Route path='/:slug/:category?' element={<Collection collections={data.collections} products={data.products}/>} />
         <Route path='/product/:slug' element={<Product products={data.products}/>} />
       </Routes>
     </>
