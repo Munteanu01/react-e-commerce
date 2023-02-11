@@ -53,7 +53,7 @@ export default function App(){
     <>
       <Navbar collections={data.collections} menu={menu} eye={eye} close={close}account={account} search={search} cart={cart} arrow={arrow}/>
       <Routes>
-        <Route path='/' element={<Home background={data.backgrounds[0]} />} />
+        <Route path='*' element={<Home backgrounds={data.backgrounds} />} />
         <Route path='/collection/:slug' element={<Collection collections={data.collections}/>} />
         <Route path='/product/:slug' element={<Product products={data.products}/>} />
       </Routes>
