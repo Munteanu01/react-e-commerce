@@ -13,10 +13,11 @@ export default function Collection({ collections, products }){
                 {selectedCategory ? (
                     selectedProducts.filter(product => product.categories.some(category => category === selectedCategory)).map((product) => (
                         <ProductCard key={product.id} product={product} />
-                ))) : (
-                selectedProducts.map(product => (
+                    ))) : (
+                    selectedProducts.map(product => (
                     <ProductCard key={product.id} product={product} />
-                )))}
+                    )))
+                }
         </div>
     );
 }

@@ -38,7 +38,9 @@ export default function App(){
           price,
           new,
           categories,
-          image{ url }
+          colors,
+          sizes,
+          image{ url },
           collections { name }
         }
       }`
