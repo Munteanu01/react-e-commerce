@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom"
-import ProductCard from "../components/ProductCard"
+import Products from "../components/Products"
 export default function Collection({ collections, products }){
     const params = useParams()
     const selectedCategory = params.category
@@ -10,14 +10,11 @@ export default function Collection({ collections, products }){
     return (
         <div className="pt-20">
             <h1 className="text-4xl">{selectedCollection.name}</h1>
-                {selectedCategory ? (
-                    selectedProducts.filter(product => product.categories.some(category => category === selectedCategory)).map((product) => (
-                        <ProductCard key={product.id} product={product} />
-                    ))) : (
-                    selectedProducts.map(product => (
-                    <ProductCard key={product.id} product={product} />
-                    )))
-                }
+            {selectedCategory ? (
+                <Products products={selectedProducts.filter(product => product.categories.some(category => category === selectedCategory))} />
+                ) : (
+                <Products products={selectedProducts} />)
+            }
         </div>
     );
 }
