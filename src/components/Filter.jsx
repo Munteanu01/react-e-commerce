@@ -4,13 +4,13 @@ export const Filter = (products) => {
   let sizesArr = [];
   let colorsArr = [];
   let categoriesArr = [];
-  products.map((product) => {
-    product.sizes.map((size) => {
+  products.forEach((product) => {
+    product.sizes.forEach((size) => {
       if (!sizesArr.includes(size)) {
         sizesArr.push(size);
       }
     });
-    product.categories.map((category) => {
+    product.categories.forEach((category) => {
       if (!categoriesArr.includes(category)) {
         categoriesArr.push(category);
       }
@@ -30,24 +30,34 @@ export default function Filtering({ products, handleFilterChange, selectedFilter
     { type: "colors", values: colorsArr },
   ];
 
+  const [showFilters, setShowFilters] = useState({});
+
+  const handleFilterHeaderClick = (filterType) => {
+    setShowFilters({ ...showFilters, [filterType]: !showFilters[filterType] });
+  };
+
   return (
-    <>
-      <button>FILTER</button>
-      {filters.map((filter) =>
-        filter.values.map((value) => (
-          <div key={value}>
-            <label htmlFor={value}>{value}</label>
-            <input
-              type="checkbox"
-              name={value}
-              id={value}
-              data-filter-type={filter.type}
-              onChange={handleFilterChange}
-              checked={selectedFilters[filter.type].includes(value)}
-            />
-          </div>
-        ))
-      )}
-    </>
+      filters.map((filter) => (
+        <div key={filter.type}>
+          <button onClick={() => handleFilterHeaderClick(filter.type)}>{filter.type.toUpperCase()}</button>
+          {showFilters[filter.type] && filter.values.map((value) => (
+            <div key={value}>
+              <label htmlFor={value}>{value}</label>
+              <input
+                type="checkbox"
+                name={value}
+                id={value}
+                data-filter-type={filter.type}
+                onChange={handleFilterChange}
+                checked={selectedFilters[filter.type].includes(value)}
+              />
+            </div>
+          ))}
+        </div>
+      ))
   );
 }
+
+
+
+
