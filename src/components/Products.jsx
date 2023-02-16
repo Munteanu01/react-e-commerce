@@ -1,10 +1,11 @@
-import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Filter from "./Filter";
 import ProductCard from "./ProductCard";
+import Sort from "./Sort";
 
-export default function Products({ products }) {
+export default function Products({ products, filters }) {
 
+//SORTING
   const [selectedSort, setSelectedSort] = useState("recommended");
   const [defaultSort, setDefaultSort] = useState([]);
   useEffect(() => {
@@ -15,7 +16,6 @@ export default function Products({ products }) {
   const handleSortChange = (event) => {
     const value = event.target.value;
     setSelectedSort(value);
-
     if (value === "recommended") {
       setDefaultSort([...products]);
     } else {
@@ -38,6 +38,7 @@ export default function Products({ products }) {
     }
   })();
 
+//FILTERING
   const [selectedFilters, setSelectedFilters] = useState({
     categories: [],
     sizes: [],
@@ -58,25 +59,12 @@ export default function Products({ products }) {
 
   return (
     <>
-      <div>
-        <label htmlFor="sort-select">Sort by:</label>
-        <select
-          className="text-black"
-          id="sort-select"
-          value={selectedSort}
-          onChange={handleSortChange}
-        >
-          <option value="recommended">Recommended</option>
-          <option value="price">Price (low to high)</option>
-          <option value="-price">Price (high to low)</option>
-          <option value="name">Name</option>
-        </select>
-      </div>
-      <Filter
-        products={products}
-        handleFilterChange={handleFilterChange}
-        selectedFilters={selectedFilters}
-      />
+{/*SORT*/}
+      <Sort selectedSort={selectedSort} handleSortChange={handleSortChange}/>
+{/*FILTER*/}
+      <Filter products={products} filters={filters} handleFilterChange={handleFilterChange} selectedFilters={selectedFilters}/>
+    
+{/*PRODUCTS*/}
       {sortedProducts.map((product) => {
         const hasSelectedFilters =
           (selectedFilters.categories.length === 0 ||

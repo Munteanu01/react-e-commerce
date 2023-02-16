@@ -16,46 +16,43 @@ export const Filter = (products) => {
       }
     });
     if (!colorsArr.includes(product.colors)) {
-      colorsArr.push(product.colors);
-    }
+        colorsArr.push(product.colors);}
   });
   return { sizesArr, colorsArr, categoriesArr };
 };
 
-export default function Filtering({ products, handleFilterChange, selectedFilters }) {
+export default function Filtering({ products, filters, handleFilterChange, selectedFilters }) {
   const { sizesArr, colorsArr, categoriesArr } = Filter(products);
-  const filters = [
-    { type: "categories", values: categoriesArr },
-    { type: "sizes", values: sizesArr },
-    { type: "colors", values: colorsArr },
-  ];
-
+  const filtersArr = filters ? filters.map(filter => ({
+    type: filter.type,
+    values: Filter(products)[`${filter.type}Arr`],
+  })) : [
+    categoriesArr.length > 0 && { type: "categories", values: categoriesArr },
+    sizesArr.length > 0 && { type: "sizes", values: sizesArr },
+    colorsArr.length > 0 && { type: "colors", values: colorsArr },
+  ].filter(Boolean);
   const [showFilters, setShowFilters] = useState({});
-
   const handleFilterHeaderClick = (filterType) => {
-    setShowFilters({ ...showFilters, [filterType]: !showFilters[filterType] });
-  };
-
+    setShowFilters({ ...showFilters, [filterType]: !showFilters[filterType] });};
   return (
-      filters.map((filter) => (
-        <div key={filter.type}>
-          <button onClick={() => handleFilterHeaderClick(filter.type)}>{filter.type.toUpperCase()}</button>
-          {showFilters[filter.type] && filter.values.map((value) => (
-            <div key={value}>
-              <label htmlFor={value}>{value}</label>
-              <input
-                type="checkbox"
-                name={value}
-                id={value}
-                data-filter-type={filter.type}
-                onChange={handleFilterChange}
-                checked={selectedFilters[filter.type].includes(value)}
-              />
-            </div>
-          ))}
-        </div>
-      ))
-  );
+    filtersArr.map((filter) => (
+      <div key={filter.type} className="flex">
+        <button onClick={() => handleFilterHeaderClick(filter.type)}>{filter.type?.toUpperCase()}</button>
+        {showFilters[filter.type] && filter.values.map((value) => (
+          <div key={value}>
+            <label htmlFor={value}>{value}</label>
+            <input type="checkbox"
+              name={value}
+              id={value}
+              data-filter-type={filter.type}
+              onChange={handleFilterChange}
+              checked={selectedFilters[filter.type].includes(value)}
+            />
+          </div>
+        ))}
+      </div>
+    ))
+  )
 }
 
 
