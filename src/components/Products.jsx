@@ -8,8 +8,9 @@ export default function ProductCard({ products }) {
     sizes: [],
     colors: [],
   });
-  const [selectedSort, setSelectedSort] = useState("price");
-  
+  const [selectedSort, setSelectedSort] = useState("recommended");
+  const [defaultSort, setDefaultSort] = useState([...products]);
+
   const handleFilterChange = (event) => {
     const filterType = event.target.getAttribute("data-filter-type");
     const filterValue = event.target.name;
@@ -22,28 +23,47 @@ export default function ProductCard({ products }) {
           ),
     }));
   };
-  
+
   const handleSortChange = (event) => {
-    setSelectedSort(event.target.value);
+    const value = event.target.value;
+    setSelectedSort(value);
+
+    if (value === "recommended") {
+      setDefaultSort([...products]);
+    } else {
+      setDefaultSort(null);
+    }
   };
 
-  const sortedProducts = [...products].sort((a, b) => {
-    if (selectedSort === "name") {
-      return a.name.localeCompare(b.name);
+  const sortedProducts = (() => {
+    if (selectedSort === "recommended") {
+      return defaultSort;
     } else {
-      const ascending = selectedSort === "price";
-      const comparison = a.price - b.price;
-      return ascending ? comparison : -comparison;
+      return [...products].sort((a, b) => {
+        if (selectedSort === "name") {
+          return a.name.localeCompare(b.name);
+        } else {
+          const ascending = selectedSort === "price";
+          const comparison = a.price - b.price;
+          return ascending ? comparison : -comparison;
+        }
+      });
     }
-  });
+  })();
 
   return (
     <>
       <div>
         <label htmlFor="sort-select">Sort by:</label>
-        <select className="text-black" id="sort-select" value={selectedSort} onChange={handleSortChange}>
-        <option value="price">Price (low to high)</option>
-  <option value="-price">Price (high to low)</option>
+        <select
+          className="text-black"
+          id="sort-select"
+          value={selectedSort}
+          onChange={handleSortChange}
+        >
+          <option value="recommended">Recommended</option>
+          <option value="price">Price (low to high)</option>
+          <option value="-price">Price (high to low)</option>
           <option value="name">Name</option>
         </select>
       </div>
@@ -53,11 +73,15 @@ export default function ProductCard({ products }) {
         selectedFilters={selectedFilters}
       />
       {sortedProducts.map((product) => {
-        const hasSelectedFilters = (
-          (selectedFilters.categories.length === 0 || selectedFilters.categories.some((category) => product.categories.includes(category))) &&
-          (selectedFilters.sizes.length === 0 || selectedFilters.sizes.some((size) => product.sizes.includes(size))) &&
-          (selectedFilters.colors.length === 0 || selectedFilters.colors.includes(product.colors))
-        );
+        const hasSelectedFilters =
+          (selectedFilters.categories.length === 0 ||
+            selectedFilters.categories.some((category) =>
+              product.categories.includes(category)
+            )) &&
+          (selectedFilters.sizes.length === 0 ||
+            selectedFilters.sizes.some((size) => product.sizes.includes(size))) &&
+          (selectedFilters.colors.length === 0 ||
+            selectedFilters.colors.includes(product.colors));
         return (
           <Link
             to={`/product/${product.slug}`}
@@ -67,8 +91,13 @@ export default function ProductCard({ products }) {
             <div className="max-w-lg  relative">
               <p>{product.name}</p>
               <div>
-                {product.new && (<div className="bg-black text-white p-3 m-2 absolute right-0">NEW</div>)}
+                {product.new && (
+                  <div className="bg-black text-white p-3 m-2 absolute right-0">
+                    NEW
+                  </div>
+                )}
                 <img src={product.image.url} alt="" />
+             
               </div>
               <p>{product.price}</p>
             </div>
