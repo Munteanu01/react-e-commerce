@@ -9,3 +9,6 @@ html, body {
   background-color: black;
   color: white;
 }
+input[type="search"]::-webkit-search-cancel-button {
+  display: none;
+}

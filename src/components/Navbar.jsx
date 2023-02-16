@@ -15,6 +15,18 @@ export default function Navbar(props){
         };
         });
     };
+    const [searchMenu, setSearchMenu] = useState(false)
+    const toggleSearchMenu = () => {
+        setSearchMenu(!searchMenu)
+    }
+    const [searchQuery, setSearchQuery] = useState('');
+
+    const handleSubmit = (event) => {
+      event.preventDefault();
+      if (searchQuery.trim() !== '') {
+        window.location.href = `/search/${searchQuery}`;
+      }
+    };
     return(
     <nav className=" z-50 fixed bg-black">
 
@@ -28,9 +40,22 @@ export default function Navbar(props){
             <Link className="ml-auto" to={""}>
                 <img className="w-[22px]" src={props.account} alt="" />
             </Link>
-            <button>
+            <button onClick={toggleSearchMenu}>
                 <img className="w-[24px] mx-5" src={props.search} alt="" />
             </button>
+            {searchMenu && (
+              <div className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-50">
+                <form onSubmit={handleSubmit}>
+                <img className="w-8 top-6 right-6 absolute" src={props.close} alt="" onClick={toggleSearchMenu}/>
+                <input
+                  type="search"
+                  placeholder=""
+                  className="p-2 text-bold text-4xl text-center text-white bg-transparent border-b-4 outline-none w-[50vw]"
+                  value={searchQuery}
+                  onChange={(event) => setSearchQuery(event.target.value)}/>
+                </form>
+              </div>
+            )}
             <button>
                 <img className="w-[22px]" src={props.cart} alt="" />
             </button>

@@ -6,6 +6,7 @@ import Home from './pages/Home';
 import New from './pages/New';
 import Collection from './pages/Collection';
 import Product from './pages/Product'
+import Search from './pages/Search'
 import menu from '/src/icons/menu-white.png'
 import eye from '/src/icons/eye-white.png'
 import account from '/src/icons/account-white.png'
@@ -57,6 +58,7 @@ export default function App(){
         <Route path='/new' element={<New products={data.products}/>} />
         <Route path='/:slug/:category?' element={<Collection collections={data.collections} products={data.products}/>} />
         <Route path='/product/:slug' element={<Product products={data.products}/>} />
+        <Route path='/search/:searchQuery' element={<Search products={data.products}/>}/>
       </Routes>
     </>
   )
