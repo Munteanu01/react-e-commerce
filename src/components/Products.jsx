@@ -1,29 +1,17 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Filter from "./Filter";
+import ProductCard from "./ProductCard";
 
-export default function ProductCard({ products }) {
-  const [selectedFilters, setSelectedFilters] = useState({
-    categories: [],
-    sizes: [],
-    colors: [],
-  });
+export default function Products({ products }) {
+
   const [selectedSort, setSelectedSort] = useState("recommended");
-  const [defaultSort, setDefaultSort] = useState([...products]);
-
-  const handleFilterChange = (event) => {
-    const filterType = event.target.getAttribute("data-filter-type");
-    const filterValue = event.target.name;
-    setSelectedFilters((prevSelectedFilters) => ({
-      ...prevSelectedFilters,
-      [filterType]: event.target.checked
-        ? [...prevSelectedFilters[filterType], filterValue]
-        : prevSelectedFilters[filterType].filter(
-            (selectedValue) => selectedValue !== filterValue
-          ),
-    }));
-  };
-
+  const [defaultSort, setDefaultSort] = useState([]);
+  useEffect(() => {
+    if (products.length > 0) {
+      setDefaultSort([...products]);
+    }
+  }, [products]);
   const handleSortChange = (event) => {
     const value = event.target.value;
     setSelectedSort(value);
@@ -34,7 +22,6 @@ export default function ProductCard({ products }) {
       setDefaultSort(null);
     }
   };
-
   const sortedProducts = (() => {
     if (selectedSort === "recommended") {
       return defaultSort;
@@ -50,6 +37,24 @@ export default function ProductCard({ products }) {
       });
     }
   })();
+
+  const [selectedFilters, setSelectedFilters] = useState({
+    categories: [],
+    sizes: [],
+    colors: [],
+  });
+  const handleFilterChange = (event) => {
+  const filterType = event.target.getAttribute("data-filter-type");
+  const filterValue = event.target.name;
+  setSelectedFilters((prevSelectedFilters) => ({
+      ...prevSelectedFilters,
+      [filterType]: event.target.checked
+        ? [...prevSelectedFilters[filterType], filterValue]
+        : prevSelectedFilters[filterType].filter(
+            (selectedValue) => selectedValue !== filterValue
+          ),
+    }));
+  };
 
   return (
     <>
@@ -83,25 +88,7 @@ export default function ProductCard({ products }) {
           (selectedFilters.colors.length === 0 ||
             selectedFilters.colors.includes(product.colors));
         return (
-          <Link
-            to={`/product/${product.slug}`}
-            key={product.slug}
-            className={!hasSelectedFilters ? "hidden" : null}
-          >
-            <div className="max-w-lg  relative">
-              <p>{product.name}</p>
-              <div>
-                {product.new && (
-                  <div className="bg-black text-white p-3 m-2 absolute right-0">
-                    NEW
-                  </div>
-                )}
-                <img src={product.image.url} alt="" />
-             
-              </div>
-              <p>{product.price}</p>
-            </div>
-          </Link>
+          <ProductCard product={product} hasSelectedFilters={hasSelectedFilters} key={product.id}/>
         );
       })}
     </>
