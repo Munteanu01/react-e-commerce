@@ -31,14 +31,14 @@ export default function Navbar(props){
     return(
     <nav className=" z-50 fixed bg-black">
 
-        <div className="h-[50px] px-5 items-center flex w-[100vw]">
+        <div className="h-[50px] pl-5 pr-5 md:pr-10 items-center flex w-[100vw]">
             <button className="w-[20px]">
                 <img src={props.menu} onClick={toggleMenu} alt="" />
             </button>
             <Link to={'/'}>
                 <img className="w-[37px] ml-5" src={props.eye} alt="" />
             </Link>
-            <Link className="ml-auto" to={""}>
+            <Link className="ml-auto" to="/account">
                 <img className="w-[22px]" src={props.account} alt="" />
             </Link>
             <button onClick={toggleSearchMenu}>
@@ -47,7 +47,7 @@ export default function Navbar(props){
             {searchMenu && (
               <div className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-50">
                 <form onSubmit={handleSubmit}>
-                <img className="w-8 top-6 right-6 absolute" src={props.close} alt="" onClick={toggleSearchMenu}/>
+                <img className="w-8 top-3 right-5 absolute" src={props.close} alt="" onClick={toggleSearchMenu}/>
                 <input
                   type="search"
                   placeholder=""

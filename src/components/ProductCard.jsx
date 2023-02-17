@@ -15,9 +15,9 @@ export default function ProductCard({ product, hasSelectedFilters }) {
                 <img src={product.image.url} alt="" />
              
               </div>
-              <div className="flex justify-between">
+              <div className="flex justify-between text-xl">
                  <p>{product.name}</p>
-                 <p>{product.price}</p>
+                 <p>{product.price}$</p>
               </div>
             </div>
         </Link>

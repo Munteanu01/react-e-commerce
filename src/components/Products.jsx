@@ -59,12 +59,12 @@ export default function Products({ products, filters }) {
 
   return (
     <div className="pt-20">
-      <div className="flex justify-between pb-10">
+      <div className="flex justify-between pb-10 mx-12">
         <Filter products={products} filters={filters} handleFilterChange={handleFilterChange} selectedFilters={selectedFilters}/>
         <Sort selectedSort={selectedSort} handleSortChange={handleSortChange}/>
       </div>
 {/*PRODUCTS*/}
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-3 gap-4 mx-12">
       {sortedProducts.map((product) => {
         const hasSelectedFilters =
           (selectedFilters.categories.length === 0 ||
