@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useState} from "react";
+import { useState } from "react";
 export default function Navbar(props){
     const collections = props.collections
     const [menuIsOpen, setMenuIsOpen] = useState(false);
@@ -22,11 +22,12 @@ export default function Navbar(props){
     const [searchQuery, setSearchQuery] = useState('');
 
     const handleSubmit = (event) => {
-      event.preventDefault();
-      if (searchQuery.trim() !== '') {
-        window.location.href = `/search/${searchQuery}`;
-      }
-    };
+        event.preventDefault();
+        if (searchQuery.trim() !== '') {
+          const encodedQuery = encodeURIComponent(searchQuery).replace(/%20/g, '+').replace(/%2B/g, '+').toLowerCase();
+          window.location.href = `/search/${encodedQuery}`;
+        }
+      };
     return(
     <nav className=" z-50 fixed bg-black">
 

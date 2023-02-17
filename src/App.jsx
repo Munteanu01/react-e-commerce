@@ -58,7 +58,7 @@ export default function App(){
         <Route path='/new' element={<New products={data.products}/>} />
         <Route path='/:slug/:category?' element={<Collection collections={data.collections} products={data.products}/>} />
         <Route path='/product/:slug' element={<Product products={data.products}/>} />
-        <Route path='/search/:searchQuery' element={<Search products={data.products}/>}/>
+        <Route path='/search/:query' element={<Search products={data.products}/>}/>
       </Routes>
     </>
   )
