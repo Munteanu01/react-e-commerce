@@ -58,13 +58,13 @@ export default function Products({ products, filters }) {
   };
 
   return (
-    <>
-{/*SORT*/}
-      <Sort selectedSort={selectedSort} handleSortChange={handleSortChange}/>
-{/*FILTER*/}
-      <Filter products={products} filters={filters} handleFilterChange={handleFilterChange} selectedFilters={selectedFilters}/>
-    
+    <div className="pt-20">
+      <div className="flex justify-between pb-10">
+        <Filter products={products} filters={filters} handleFilterChange={handleFilterChange} selectedFilters={selectedFilters}/>
+        <Sort selectedSort={selectedSort} handleSortChange={handleSortChange}/>
+      </div>
 {/*PRODUCTS*/}
+      <div className="grid grid-cols-3 gap-4">
       {sortedProducts.map((product) => {
         const hasSelectedFilters =
           (selectedFilters.categories.length === 0 ||
@@ -76,9 +76,10 @@ export default function Products({ products, filters }) {
           (selectedFilters.colors.length === 0 ||
             selectedFilters.colors.includes(product.colors));
         return (
-          <ProductCard product={product} hasSelectedFilters={hasSelectedFilters} key={product.id}/>
+            <ProductCard product={product} hasSelectedFilters={hasSelectedFilters} key={product.id}/>
         );
       })}
-    </>
+      </div>
+    </div>
   );
 }

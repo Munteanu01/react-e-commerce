@@ -6,7 +6,6 @@ export default function ProductCard({ product, hasSelectedFilters }) {
             key={product.slug}
             className={!hasSelectedFilters ? "hidden" : null}>
             <div className="max-w-lg  relative">
-              <p>{product.name}</p>
               <div>
                 {product.new && (
                   <div className="bg-black text-white p-3 m-2 absolute right-0">
@@ -16,7 +15,10 @@ export default function ProductCard({ product, hasSelectedFilters }) {
                 <img src={product.image.url} alt="" />
              
               </div>
-              <p>{product.price}</p>
+              <div className="flex justify-between">
+                 <p>{product.name}</p>
+                 <p>{product.price}</p>
+              </div>
             </div>
         </Link>
     )
