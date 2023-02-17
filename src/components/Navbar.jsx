@@ -57,9 +57,9 @@ export default function Navbar(props){
                 </form>
               </div>
             )}
-            <button>
+            <Link to="/cart">
                 <img className="w-[22px]" src={props.cart} alt="" />
-            </button>
+            </Link>
         </div>
 
         <div className={`${ menuIsOpen ? "left-[0px]" : "left-[-350px]"} md:pl-[40px] pl-[20px] pr-5 block absolute w-[260px] h-[100vh] inset-0 bg-black transition-all ease-in-out`}>
