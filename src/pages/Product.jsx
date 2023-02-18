@@ -5,7 +5,7 @@ export default function Product({ products }) {
   const params = useParams();
   const product = products.find((p) => p.slug === params.slug);
   const [selectedSize, setSelectedSize] = useState(
-    product.sizes.includes("UNIQUE") ? "UNIQUE" : ""
+    product?.sizes.includes("UNIQUE") ? "UNIQUE" : ""
   );
   const [cartItems, setCartItems] = useState(() => {
     const storedCartItems = localStorage.getItem("cartItems");
@@ -32,7 +32,7 @@ export default function Product({ products }) {
   return  (
     <>
       {product ? (
-        <div className="pt-40 flex">
+        <div className=" pt-80 flex">
           <img className="w-[200px]" src={product.image.url} alt="" />
           <h1>{product.name}</h1>
           {!product.sizes.includes("UNIQUE") && (
