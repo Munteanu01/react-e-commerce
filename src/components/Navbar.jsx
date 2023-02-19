@@ -1,62 +1,37 @@
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
+import Searching from "./Searching";
+
 export default function Navbar(props){
     const collections = props.collections
     const [menuIsOpen, setMenuIsOpen] = useState(false);
     const toggleMenu = () => {
         setMenuIsOpen(!menuIsOpen);
-    }
+    };
     const [collectionStates, setCollectionStates] = useState({});
     const toggleCollection = (collectionId) => {
         setCollectionStates((prevState) => {
-        return {
-            ...prevState,
-            [collectionId]: !prevState[collectionId],
-        };
+            return {
+                ...prevState,
+                [collectionId]: !prevState[collectionId],
+            };
         });
     };
-    const [searchMenu, setSearchMenu] = useState(false)
-    const toggleSearchMenu = () => {
-        setSearchMenu(!searchMenu)
-    }
-    const [searchQuery, setSearchQuery] = useState('');
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        if (searchQuery.trim() !== '') {
-          const encodedQuery = encodeURIComponent(searchQuery).replace(/%20/g, '+').replace(/%2B/g, '+').toLowerCase();
-          window.location.href = `/search/${encodedQuery}`;
-        }
-      };
+
+
     return(
-    <nav className=" z-50 fixed bg-black">
-
-        <div className="h-[50px] pl-5 pr-5 md:pr-10 items-center flex w-[100vw]">
-
-            <button className="w-[20px]">
-                <img src={props.menu} onClick={toggleMenu} alt="" />
-            </button>
-            <Link to={'/'}>
-                <img className="w-[37px] ml-5" src={props.eye} alt="" />
-            </Link>
-            <Link className="ml-auto" to="/account">
-                <img className="w-[22px]" src={props.account} alt="" />
-            </Link>
-            <button onClick={toggleSearchMenu}>
-                <img className="w-[24px] mx-5" src={props.search} alt="" />
-            </button>
-            {searchMenu && (
-              <div className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-50">
-                <form onSubmit={handleSubmit}>
-                <img className="w-8 top-3 right-5 absolute" src={props.close} alt="" onClick={toggleSearchMenu}/>
-                <input
-                  type="search"
-                  placeholder=""
-                  className="p-2 text-bold text-4xl text-center text-white bg-transparent border-b-4 outline-none w-[50vw]"
-                  value={searchQuery}
-                  onChange={(event) => setSearchQuery(event.target.value)}/>
-                </form>
-              </div>
-            )}
+        <nav className="z-50 fixed bg-black">
+            <div className="h-[50px] pl-5 pr-5 md:pr-10 items-center flex w-[100vw]">
+                <button className="w-[20px]">
+                    <img src={props.menu} onClick={toggleMenu} alt="" />
+                </button>
+                <Link to={'/'}>
+                    <img className="w-[37px] ml-5" src={props.eye} alt="" />
+                </Link>
+                <Link className="ml-auto" to="/account">
+                    <img className="w-[22px]" src={props.account} alt="" />
+                </Link>
+                <Searching search={props.search} close={props.close}/>
             <Link to="/cart">
                 <img className="w-[22px]" src={props.cart} alt="" />
             </Link>

@@ -59,7 +59,7 @@ export default function Products({ products, filters }) {
 
   return (
     <div className="pt-20">
-      <div className="flex justify-between pb-10 mx-12">
+      <div className="flex justify-between pb-10 mx-12 font-bold">
         <Filter products={products} filters={filters} handleFilterChange={handleFilterChange} selectedFilters={selectedFilters}/>
         <Sort selectedSort={selectedSort} handleSortChange={handleSortChange}/>
       </div>

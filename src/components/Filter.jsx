@@ -31,17 +31,11 @@ export default function Filtering({ products, filters, handleFilterChange, selec
     sizesArr.length > 0 && { type: "sizes", values: sizesArr },
     colorsArr.length > 0 && { type: "colors", values: colorsArr },
   ].filter(Boolean);
-  const [isFilterVisible, setIsFilterVisible] = useState(false);
-  const handleFilterButtonClick = () => {
-    setIsFilterVisible(!isFilterVisible);
-  };
   const [showFilters, setShowFilters] = useState({});
   const handleFilterHeaderClick = (filterType) => {
     setShowFilters({ ...showFilters, [filterType]: !showFilters[filterType] });};
   return (
-    <div className="">
-      <button onClick={handleFilterButtonClick}>FILTER</button>
-      <div className={isFilterVisible ? 'flex' : 'hidden'}>
+      <div className='flex'>
       {filtersArr.map((filter) => (
         <div key={filter.type} className="mx-10">
         <button onClick={() => handleFilterHeaderClick(filter.type)}>{filter.type?.toUpperCase()}</button>
@@ -60,7 +54,6 @@ export default function Filtering({ products, filters, handleFilterChange, selec
         </div>
       ))}
       </div>
-    </div>
   )
 }
 
