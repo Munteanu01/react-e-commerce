@@ -5,7 +5,7 @@ export default function Home({backgrounds}){
     return(
         <div className="" key={randomBackground?.id}>
             <Link to={'/new'}>
-            <video className="h-screen w-screen object-cover" src={randomBackground?.image.url}  autoPlay loop muted alt="" />
+            <video className="h-screen w-screen  max-h-screen max-w-screen object-cover" src={randomBackground?.image.url}  autoPlay loop muted alt="" />
             </Link>
         </div>
     )
