@@ -6,12 +6,6 @@ export default function Navbar(props){
     const toggleMenu = () => {
         setMenuIsOpen(!menuIsOpen);
     }
-    const [isCartVisible, setIsCartVisible] = useState(false);
-
-    const handleToggleCart = () => {
-      setIsCartVisible((prevState) => !prevState);
-    };
-  
     const [collectionStates, setCollectionStates] = useState({});
     const toggleCollection = (collectionId) => {
         setCollectionStates((prevState) => {
@@ -26,44 +20,12 @@ export default function Navbar(props){
         setSearchMenu(!searchMenu)
     }
     const [searchQuery, setSearchQuery] = useState('');
-
     const handleSubmit = (event) => {
         event.preventDefault();
         if (searchQuery.trim() !== '') {
           const encodedQuery = encodeURIComponent(searchQuery).replace(/%20/g, '+').replace(/%2B/g, '+').toLowerCase();
           window.location.href = `/search/${encodedQuery}`;
         }
-      };
-    const [cartItems, setCartItems] = useState(() => {
-        const storedCartItems = localStorage.getItem("cartItems");
-        return storedCartItems ? JSON.parse(storedCartItems) : [];
-      });
-      const handleIncreaseQuantity = (id, size) => {
-        const updatedItems = cartItems.map((item) =>
-          item.id === id && item.size === size
-            ? { ...item, quantity: item.quantity + 1 }
-            : item
-        );
-        setCartItems(updatedItems);
-        localStorage.setItem("cartItems", JSON.stringify(updatedItems));
-      };
-      
-      const handleDecreaseQuantity = (id, size) => {
-        const updatedItems = cartItems
-          .map((item) =>
-            item.id === id && item.size === size
-              ? { ...item, quantity: item.quantity - 1 }
-              : item
-          )
-          .filter((item) => item.quantity > 0);
-        setCartItems(updatedItems);
-        localStorage.setItem("cartItems", JSON.stringify(updatedItems));
-      };
-      
-      const handleRemoveItem = (id, size) => {
-        const updatedItems = cartItems.filter((item) => item.id !== id || item.size !== size);
-        setCartItems(updatedItems);
-        localStorage.setItem("cartItems", JSON.stringify(updatedItems));
       };
     return(
     <nav className=" z-50 fixed bg-black">
@@ -95,25 +57,9 @@ export default function Navbar(props){
                 </form>
               </div>
             )}
-            <button onClick={handleToggleCart}>
+            <Link to="/cart">
                 <img className="w-[22px]" src={props.cart} alt="" />
-            </button>
-            <div className={isCartVisible ? 'mt-14 top-0 right-0 absolute bg-black px-20' : 'hidden'}>
-              <h1>Cart</h1>
-                  <ul>
-                     {cartItems.map((item) => (
-                        <li key={`${item.id}-${item.size}`}>
-                         <p>{item.name} {item.size}</p>
-                         <button className="mx-3" onClick={() => handleDecreaseQuantity(item.id, item.size)}>-</button>
-                           {item.quantity}
-                         <button className="mx-3" onClick={() => handleIncreaseQuantity(item.id, item.size)}>+</button>
-
-                         <button className="mx-3" onClick={() => handleRemoveItem(item.id, item.size)}>Remove</button>
-                        </li>
-                      ))}
-                  </ul>
-              <Link to="/cart">View all</Link>
-            </div>
+            </Link>
 
         </div>
 
