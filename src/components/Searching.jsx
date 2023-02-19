@@ -21,16 +21,9 @@ export default function Searching({search, close}){
               setSearchMenu(false);
             }
           };
-          const handlePopState = () => {
-            setSearchMenu(false);
-          };
           searchInputRef.current.focus();
           window.addEventListener('keydown', handleKeyDown);
-          window.addEventListener('popstate', handlePopState);
-          return () => {
-            window.removeEventListener('keydown', handleKeyDown);
-            window.removeEventListener('popstate', handlePopState);
-          };
+          return () => window.removeEventListener('keydown', handleKeyDown);
         }
       }, [searchMenu]);
     return(

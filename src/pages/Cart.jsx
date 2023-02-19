@@ -6,26 +6,15 @@ export default function Cart() {
     return storedCartItems ? JSON.parse(storedCartItems) : [];
   });
   
-  const handleIncreaseQuantity = (id, size) => {
-    const updatedItems = cartItems.map((item) =>
-      item.id === id && item.size === size
-        ? { ...item, quantity: item.quantity + 1 }
-        : item
-    );
-    setCartItems(updatedItems);
-    localStorage.setItem("cartItems", JSON.stringify(updatedItems));
-  };
-  
-  const handleDecreaseQuantity = (id, size) => {
+  const handleQuantityChange = (id, size, amount) => {
     const updatedItems = cartItems
       .map((item) =>
         item.id === id && item.size === size
-          ? { ...item, quantity: item.quantity - 1 }
+          ? { ...item, quantity: item.quantity + amount }
           : item
       )
       .filter((item) => item.quantity > 0);
     setCartItems(updatedItems);
-    localStorage.setItem("cartItems", JSON.stringify(updatedItems));
   };
   
   const handleRemoveItem = (id, size) => {
@@ -42,9 +31,9 @@ export default function Cart() {
           <li key={`${item.id}-${item.size}`}>
             <p>{item.name} {item.size}</p>
   
-            <button className="mx-3" onClick={() => handleDecreaseQuantity(item.id, item.size)}>-</button>
-            {item.quantity}
-            <button className="mx-3" onClick={() => handleIncreaseQuantity(item.id, item.size)}>+</button>
+            <button className="mx-3" onClick={() => handleQuantityChange(item.id, item.size, -1)}>-</button>
+              {item.quantity}
+            <button className="mx-3" onClick={() => handleQuantityChange(item.id, item.size, 1)}>+</button>
 
             <button className="mx-3" onClick={() => handleRemoveItem(item.id, item.size)}>Remove</button>
           </li>
