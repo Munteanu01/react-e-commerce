@@ -28,9 +28,10 @@ export default function Cart() {
       <h1>Cart</h1>
       <ul>
         {cartItems.map((item) => (
-          <li key={`${item.id}-${item.size}`}>
+          <li className="flex" key={`${item.id}-${item.size}`}>
+            <img className=" max-w-[150px]" src={item.image.url} alt="" />
             <p>{item.name} {item.size}</p>
-  
+            
             <button className="mx-3" onClick={() => handleQuantityChange(item.id, item.size, -1)}>-</button>
               {item.quantity}
             <button className="mx-3" onClick={() => handleQuantityChange(item.id, item.size, 1)}>+</button>

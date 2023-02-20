@@ -64,7 +64,7 @@ export default function Products({ products, filters }) {
         <Sort selectedSort={selectedSort} handleSortChange={handleSortChange}/>
       </div>
 {/*PRODUCTS*/}
-      <div className="grid grid-cols-3 gap-4 mx-12">
+      <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-10 mx-12">
       {sortedProducts.map((product) => {
         const hasSelectedFilters =
           (selectedFilters.categories.length === 0 ||
