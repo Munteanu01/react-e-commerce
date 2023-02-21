@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import Filter from "./Filter";
 import ProductCard from "./ProductCard";
-import Sort from "./Sort";
 
 export default function Products({ products, filters }) {
 
@@ -59,10 +58,7 @@ export default function Products({ products, filters }) {
 
   return (
     <div className="pt-20">
-      <div className="flex justify-between pb-10 mx-12 font-bold">
-        <Filter products={products} filters={filters} handleFilterChange={handleFilterChange} selectedFilters={selectedFilters}/>
-        <Sort selectedSort={selectedSort} handleSortChange={handleSortChange}/>
-      </div>
+        <Filter products={products} filters={filters} handleFilterChange={handleFilterChange} selectedFilters={selectedFilters} selectedSort={selectedSort} handleSortChange={handleSortChange}/>
 {/*PRODUCTS*/}
       <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-10 mx-12">
       {sortedProducts.map((product) => {

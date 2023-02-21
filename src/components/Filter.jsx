@@ -21,7 +21,7 @@ export const Filter = (products) => {
   return { sizesArr, colorsArr, categoriesArr };
 };
 
-export default function Filtering({ products, filters, handleFilterChange, selectedFilters }) {
+export default function Filtering({ products, filters, handleFilterChange, selectedFilters, selectedSort, handleSortChange }) {
   const { sizesArr, colorsArr, categoriesArr } = Filter(products);
   const filtersArr = filters ? filters.map(filter => ({
     type: filter.type,
@@ -35,24 +35,28 @@ export default function Filtering({ products, filters, handleFilterChange, selec
   const handleFilterHeaderClick = (filterType) => {
     setShowFilters({ ...showFilters, [filterType]: !showFilters[filterType] });};
   return (
-      <div className='flex'>
+      <div className=' pb-10 mx-5 font-bold'>
+        <div className="flex justify-between">
       {filtersArr.map((filter) => (
-        <div key={filter.type} className="mx-10">
+        <div key={filter.type} className="mx-10 ">
         <button onClick={() => handleFilterHeaderClick(filter.type)}>{filter.type?.toUpperCase()}</button>
         {showFilters[filter.type] && filter.values.map((value) => (
-          <div key={value}>
+          <div className="flex" key={value}>
             <label htmlFor={value}>{value}</label>
-            <input type="checkbox"
-              name={value}
-              id={value}
-              data-filter-type={filter.type}
-              onChange={handleFilterChange}
-              checked={selectedFilters[filter.type].includes(value)}
-            />
+            <input type="checkbox" name={value} id={value} data-filter-type={filter.type} onChange={handleFilterChange} checked={selectedFilters[filter.type].includes(value)}/>
+            </div>))}
           </div>
-        ))}
+          ))}
         </div>
-      ))}
+        <div>
+        <label htmlFor="sort-select">SORT BY:</label>
+        <select className="text-black" id="sort-select" value={selectedSort} onChange={handleSortChange}>
+          <option value="recommended">Recommended</option>
+          <option value="price">Price (low to high)</option>
+          <option value="-price">Price (high to low)</option>
+          <option value="name">Name</option>
+        </select>
+        </div>
       </div>
   )
 }
