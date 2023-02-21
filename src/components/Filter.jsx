@@ -16,51 +16,105 @@ export const Filter = (products) => {
       }
     });
     if (!colorsArr.includes(product.colors)) {
-        colorsArr.push(product.colors);}
+      colorsArr.push(product.colors);
+    }
   });
   return { sizesArr, colorsArr, categoriesArr };
 };
 
-export default function Filtering({ products, filters, handleFilterChange, selectedFilters, selectedSort, handleSortChange }) {
+export default function Filtering({
+  products,
+  filters,
+  handleFilterChange,
+  selectedFilters,
+  selectedSort,
+  handleSortChange,
+}) {
   const { sizesArr, colorsArr, categoriesArr } = Filter(products);
-  const filtersArr = filters ? filters.map(filter => ({
-    type: filter.type,
-    values: Filter(products)[`${filter.type}Arr`],
-  })) : [
-    categoriesArr.length > 0 && { type: "categories", values: categoriesArr },
-    sizesArr.length > 0 && { type: "sizes", values: sizesArr },
-    colorsArr.length > 0 && { type: "colors", values: colorsArr },
-  ].filter(Boolean);
-  const [showFilters, setShowFilters] = useState({});
+  const filtersArr = filters
+    ? filters.map((filter) => ({
+        type: filter.type,
+        values: Filter(products)[`${filter.type}Arr`],
+      }))
+    : [
+        categoriesArr.length > 0 && {
+          type: "categories",
+          values: categoriesArr,
+        },
+        sizesArr.length > 0 && { type: "sizes", values: sizesArr },
+        colorsArr.length > 0 && { type: "colors", values: colorsArr },
+      ].filter(Boolean);
+
+  const [showFilter, setShowFilter] = useState("");
+  const [showSort, setShowSort] = useState(false);
+
   const handleFilterHeaderClick = (filterType) => {
-    setShowFilters({ ...showFilters, [filterType]: !showFilters[filterType] });};
+    setShowFilter(showFilter === filterType ? "" : filterType);
+    setShowSort(false);
+  };
+
+  const handleSortHeaderClick = () => {
+    setShowSort(!showSort);
+    setShowFilter("");
+  };
+  const sortOptions = [
+    { value: 'recommended', label: 'RECOMMENDED' },
+    { value: 'price', label: 'PRICE' },
+    { value: '-price', label: 'PRICE (Descending)' },
+    { value: 'name', label: 'NAME' },
+  ];
   return (
-      <div className=' pb-10 mx-5 font-bold'>
-        <div className="flex justify-between">
-      {filtersArr.map((filter) => (
-        <div key={filter.type} className="mx-10 ">
-        <button onClick={() => handleFilterHeaderClick(filter.type)}>{filter.type?.toUpperCase()}</button>
-        {showFilters[filter.type] && filter.values.map((value) => (
-          <div className="flex" key={value}>
-            <label htmlFor={value}>{value}</label>
-            <input type="checkbox" name={value} id={value} data-filter-type={filter.type} onChange={handleFilterChange} checked={selectedFilters[filter.type].includes(value)}/>
-            </div>))}
+  <div>
+    <div className="sm:flex justify-between pb-10 mx-5 font-bold">
+      <div className="sm:flex">
+        {filtersArr.map((filter) => (
+          <div key={filter.type} className="ml-5">
+            <button onClick={() => handleFilterHeaderClick(filter.type)}>
+              {filter.type?.toUpperCase()}
+            </button>
+            <div className="sm:flex sm:absolute left-10">
+              {showFilter === filter.type &&
+                filter.values.map((value) => (
+                    <label key={value} className={`cursor-pointer mx-1 ${selectedFilters[filter.type].includes(value) ? 'bg-white text-black' : ''}`}>
+                     <span className="mr-1">{value}</span>
+                     <input
+                       type="checkbox"
+                       name={value}
+                       id={value}
+                       data-filter-type={filter.type}
+                       onChange={handleFilterChange}
+                       checked={selectedFilters[filter.type].includes(value)}
+                       className="hidden"/>
+                    </label>
+                ))}
+            </div>
           </div>
-          ))}
+        ))}
         </div>
-        <div>
-        <label htmlFor="sort-select">SORT BY:</label>
-        <select className="text-black" id="sort-select" value={selectedSort} onChange={handleSortChange}>
-          <option value="recommended">Recommended</option>
-          <option value="price">Price (low to high)</option>
-          <option value="-price">Price (high to low)</option>
-          <option value="name">Name</option>
-        </select>
-        </div>
+        <div key="sort" className="ml-5">
+          <button onClick={handleSortHeaderClick}>SORT</button>
+          {showSort && (
+            <div className="sm:flex sm:absolute right-20"> 
+              {sortOptions.map((option) => (
+                <label key={option.value} className={`cursor-pointer ${selectedSort === option.value ? 'bg-white text-black' : ''}`}>
+                  <span>{option.label}</span>
+                  <input
+                    type="checkbox"
+                    name="sort"
+                    value={option.value}
+                    checked={selectedSort === option.value}
+                    onChange={handleSortChange}
+                    className="hidden"
+                  />
+                </label>
+              ))}
+            </div>
+          )}
       </div>
-  )
+    </div>
+    <div>
+     
+    </div>
+  </div>
+  );
 }
-
-
-
-
