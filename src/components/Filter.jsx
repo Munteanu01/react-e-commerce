@@ -25,6 +25,7 @@ export const Filter = (products) => {
 export default function Filtering({
   products,
   filters,
+  removeFilter,
   handleFilterChange,
   selectedFilters,
   selectedSort,
@@ -63,6 +64,7 @@ export default function Filtering({
     { value: '-price', label: 'PRICE (Descending)' },
     { value: 'name', label: 'NAME' },
   ];
+  
   return (
   <div>
     <div className="sm:flex justify-between pb-10 mx-5 font-bold">
@@ -76,7 +78,7 @@ export default function Filtering({
               {showFilter === filter.type &&
                 filter.values.map((value) => (
                     <label key={value} className={`cursor-pointer mx-1 ${selectedFilters[filter.type].includes(value) ? 'bg-white text-black' : ''}`}>
-                     <span className="mr-1">{value}</span>
+                     <span className="mr-1">{value.toUpperCase()}</span>
                      <input
                        type="checkbox"
                        name={value}
@@ -113,7 +115,23 @@ export default function Filtering({
       </div>
     </div>
     <div>
-     
+    {selectedFilters?.sizes?.map((size) => (
+  <button key={size} onClick={() => removeFilter('sizes', size)}>
+    {size}
+  </button>
+))}
+
+{selectedFilters?.colors?.map((color) => (
+  <button key={color} onClick={() => removeFilter('colors', color)}>
+    {color}
+  </button>
+))}
+
+{selectedFilters?.categories?.map((category) => (
+  <button key={category} onClick={() => removeFilter('categories', category)}>
+    {category}
+  </button>
+))}
     </div>
   </div>
   );

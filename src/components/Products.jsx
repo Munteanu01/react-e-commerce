@@ -44,9 +44,9 @@ export default function Products({ products, filters }) {
     colors: [],
   });
   const handleFilterChange = (event) => {
-  const filterType = event.target.getAttribute("data-filter-type");
-  const filterValue = event.target.name;
-  setSelectedFilters((prevSelectedFilters) => ({
+    const filterType = event.target.getAttribute("data-filter-type");
+    const filterValue = event.target.name;
+    setSelectedFilters((prevSelectedFilters) => ({
       ...prevSelectedFilters,
       [filterType]: event.target.checked
         ? [...prevSelectedFilters[filterType], filterValue]
@@ -55,10 +55,21 @@ export default function Products({ products, filters }) {
           ),
     }));
   };
-
+  function removeFilter(filterType, filterValue) {
+    setSelectedFilters(prevSelectedFilters => {
+      const updatedFilters = { ...prevSelectedFilters };
+      const filterIndex = updatedFilters[filterType].indexOf(filterValue);
+      if (filterIndex > -1) {
+        updatedFilters[filterType].splice(filterIndex, 1);
+      }
+      return updatedFilters;
+    });
+  }
+  
   return (
     <div className="pt-20">
-        <Filter products={products} filters={filters} handleFilterChange={handleFilterChange} selectedFilters={selectedFilters} selectedSort={selectedSort} handleSortChange={handleSortChange}/>
+        <Filter removeFilter={removeFilter} products={products} filters={filters} handleFilterChange={handleFilterChange} selectedFilters={selectedFilters} selectedSort={selectedSort} handleSortChange={handleSortChange}/>
+        
 {/*PRODUCTS*/}
       <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-10 mx-12">
       {sortedProducts.map((product) => {
