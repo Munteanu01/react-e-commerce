@@ -77,7 +77,7 @@ export default function Filtering({
             <div className="sm:flex sm:absolute left-10">
               {showFilter === filter.type &&
                 filter.values.map((value) => (
-                    <label key={value} className={`cursor-pointer mx-1 ${selectedFilters[filter.type].includes(value) ? 'bg-white text-black' : ''}`}>
+                    <label key={value} className={`cursor-pointer mr-1 ${selectedFilters[filter.type].includes(value) ? 'bg-white text-black' : ''}`}>
                      <span className="mr-1">{value.toUpperCase()}</span>
                      <input
                        type="checkbox"
@@ -98,7 +98,7 @@ export default function Filtering({
           {showSort && (
             <div className="sm:flex sm:absolute right-20"> 
               {sortOptions.map((option) => (
-                <label key={option.value} className={`cursor-pointer ${selectedSort === option.value ? 'bg-white text-black' : ''}`}>
+                <label key={option.value} className={`cursor-pointer block ${selectedSort === option.value ? 'bg-white text-black' : ''}`}>
                   <span>{option.label}</span>
                   <input
                     type="checkbox"
@@ -116,8 +116,8 @@ export default function Filtering({
     </div>
     <div>
     {selectedFilters?.sizes?.map((size) => (
-  <button key={size} onClick={() => removeFilter('sizes', size)}>
-    {size}
+  <button className="pr-3" key={size} onClick={() => removeFilter('sizes', size)}>
+    {size.toUpperCase()}X
   </button>
 ))}
 
