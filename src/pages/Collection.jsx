@@ -11,13 +11,11 @@ export default function Collection({ collections, products }){
         { type: "colors"},
       ];
     return (
-        <div className="pt-20">
-            <h1 className="text-4xl">{selectedCollection.name}</h1>
+        <div>
             {selectedCategory ? (
                 <Products products={selectedProducts.filter(product => product.categories.some(category => category === selectedCategory))} filters={categoryFilters} />
                 ) : (
-                <Products products={selectedProducts}/>)
-            }
+                <Products products={selectedProducts}/>)}
         </div>
     );
 }

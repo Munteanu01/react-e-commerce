@@ -21,20 +21,20 @@ export default function Navbar(props){
 
     return(
         <nav className="z-50 fixed bg-black">
-            <div className="h-[50px] pl-5 pr-5 md:pr-10 items-center flex w-[100vw]">
+            <div className="h-[50px] sm:px-5 px-3 md:pr-10 items-center flex w-[100vw]">
                 <button className="w-[20px]">
                     <img src={props.menu} onClick={toggleMenu} alt="" />
                 </button>
                 <Link to={'/'}>
-                    <img className="w-[37px] ml-5" src={props.eye} alt="" />
+                    <img className="sm:w-[37px] w-[32px] ml-5" src={props.eye} alt="" />
                 </Link>
                 <Link className="ml-auto" to="/account">
                     <img className="w-[22px]" src={props.account} alt="" />
                 </Link>
                 <Searching search={props.search} close={props.close}/>
-            <Link to="/cart">
-                <img className="w-[22px]" src={props.cart} alt="" />
-            </Link>
+                <Link to="/cart">
+                    <img className="w-[22px]" src={props.cart} alt="" />
+                </Link>
 
         </div>
 

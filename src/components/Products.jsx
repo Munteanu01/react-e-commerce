@@ -67,7 +67,7 @@ export default function Products({ products, filters }) {
   }
   
   return (
-    <div className="pt-20">
+    <div className=" pt-16">
         <Filter removeFilter={removeFilter} products={products} filters={filters} handleFilterChange={handleFilterChange} selectedFilters={selectedFilters} selectedSort={selectedSort} handleSortChange={handleSortChange}/>
         
 {/*PRODUCTS*/}

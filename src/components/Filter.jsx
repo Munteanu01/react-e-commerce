@@ -1,4 +1,6 @@
 import { useState } from "react";
+import arrow from "../icons/arrow-white.png"
+import filterClose from "../icons/filter-close-white.png"
 
 export const Filter = (products) => {
   let sizesArr = [];
@@ -66,19 +68,22 @@ export default function Filtering({
   ];
   
   return (
-  <div>
-    <div className="sm:flex justify-between pb-10 mx-5 font-bold">
+    <div className="sm:flex justify-between pb-10 mx-5">
       <div className="sm:flex">
         {filtersArr.map((filter) => (
-          <div key={filter.type} className="ml-5">
-            <button onClick={() => handleFilterHeaderClick(filter.type)}>
-              {filter.type?.toUpperCase()}
+          <div key={filter.type} className="font-black">
+            <button className={`items-center flex pt-[7px] pb-[3px] px-2 justify-between w-full 
+                    ${showFilter === filter.type && ' bg-neutral-900'}`}
+                    onClick={() => handleFilterHeaderClick(filter.type)}>
+              <p className=" text-[0.9rem]">{filter.type?.toUpperCase()}</p> 
+              <img className={`w-[15px] h-[13px] mb-[3px]
+                   ${showFilter === filter.type ? " rotate-90" : " rotate-0"}`} src={arrow} alt="" />
             </button>
-            <div className="sm:flex sm:absolute left-10">
+            <div className="sm:flex sm:absolute text-center left-10 my-4 mx-6 text-[0.9rem] font-medium">
               {showFilter === filter.type &&
                 filter.values.map((value) => (
-                    <label key={value} className={`cursor-pointer mr-1 ${selectedFilters[filter.type].includes(value) ? 'bg-white text-black' : ''}`}>
-                     <span className="mr-1">{value.toUpperCase()}</span>
+                    <label key={value} className={`cursor-pointer mx-3 px-[8px] pt-[7px] pb-[4px] ${selectedFilters[filter.type].includes(value) ? 'bg-white text-black' : ''}`}>
+                     <span>{value.toUpperCase()}</span>
                      <input
                        type="checkbox"
                        name={value}
@@ -94,7 +99,10 @@ export default function Filtering({
         ))}
         </div>
         <div key="sort" className="ml-5">
-          <button onClick={handleSortHeaderClick}>SORT</button>
+          <button className="flex py-2 justify-between w-full" onClick={handleSortHeaderClick}>
+            SORT
+            <img className={`w-[15px] h-[13px] mt-[4px] ${showSort ? " rotate-90" : " rotate-0"}`} src={arrow} alt="" />
+          </button>
           {showSort && (
             <div className="sm:flex sm:absolute right-20"> 
               {sortOptions.map((option) => (
@@ -113,26 +121,24 @@ export default function Filtering({
             </div>
           )}
       </div>
+      <div className="flex bg-neutral-900 text-[0.85rem]">
+       {selectedFilters?.sizes?.map((size) => (
+          <button className="font-bold px-2 py-2 flex items-center" key={size} onClick={() => removeFilter('sizes', size)}>
+            <p>{size.toUpperCase()}</p>  
+            <img className="w-[12px] h-[12px] ml-[3px] mb-[2px] " src={filterClose} alt="" />
+          </button>
+        ))}
+        {selectedFilters?.colors?.map((color) => (
+          <button key={color} onClick={() => removeFilter('colors', color)}>
+            {color}
+          </button>
+        ))}
+        {selectedFilters?.categories?.map((category) => (
+          <button key={category} onClick={() => removeFilter('categories', category)}>
+            {category}
+          </button>
+        ))}
+      </div>
     </div>
-    <div>
-    {selectedFilters?.sizes?.map((size) => (
-  <button className="pr-3" key={size} onClick={() => removeFilter('sizes', size)}>
-    {size.toUpperCase()}X
-  </button>
-))}
-
-{selectedFilters?.colors?.map((color) => (
-  <button key={color} onClick={() => removeFilter('colors', color)}>
-    {color}
-  </button>
-))}
-
-{selectedFilters?.categories?.map((category) => (
-  <button key={category} onClick={() => removeFilter('categories', category)}>
-    {category}
-  </button>
-))}
-    </div>
-  </div>
   );
 }

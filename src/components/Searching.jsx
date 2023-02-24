@@ -29,7 +29,7 @@ export default function Searching({search, close}){
     return(
         <>
         <button onClick={toggleSearchMenu}>
-           <img className="w-[24px] mx-5" src={search} alt="" />
+           <img className="w-[24px] sm:mx-5 mx-3" src={search} alt="" />
         </button>
         {searchMenu && (
             <div className="fixed inset-0 bg-black flex justify-center items-center">
