@@ -7,7 +7,7 @@ export default function New({ products }){
         { type: "colors"},
       ];
     return (
-        <div className="pt-20">
+        <div>
             <Products products={newProducts} filters={newFilters}/>
         </div>
     )
