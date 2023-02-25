@@ -71,7 +71,7 @@ export default function Products({ products, filters }) {
         <Filter removeFilter={removeFilter} products={products} filters={filters} handleFilterChange={handleFilterChange} selectedFilters={selectedFilters} selectedSort={selectedSort} handleSortChange={handleSortChange}/>
         
 {/*PRODUCTS*/}
-      <div className="grid grid-cols-2 justify-center md:grid-cols-3 gap-10 pt-16">
+      <div className="grid grid-cols-2 justify-center md:grid-cols-3 gap-10 mt-16">
       {sortedProducts.map((product) => {
         const hasSelectedFilters =
           (selectedFilters.categories.length === 0 ||

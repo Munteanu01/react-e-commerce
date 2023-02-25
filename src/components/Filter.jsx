@@ -79,15 +79,17 @@ export default function Filtering({
       <div className="sm:flex">
         {filtersArr.map((filter) => (
           <div key={filter.type} className="">
-            <button className={`items-center flex pt-[7px] pb-[3px] px-2 justify-between w-full   ${showFilter === filter.type && ' bg-[#EFEFEF]'}`}
+            <button className={`items-center flex pt-[7px] pb-[10px] px-2 justify-between w-full  
+                               ${showFilter === filter.type && ' bg-[#EFEFEF]'}`}
                     onClick={() => handleFilterHeaderClick(filter.type)}>
               <p className="">{filter.type?.toUpperCase()}</p> 
               <img className={`ml-1 w-[15px] h-[13px] mb-[4px] ${showFilter === filter.type ? " rotate-90" : " rotate-0"}`} src={arrow} alt="" />
             </button>
             {showFilter === filter.type &&
-            <div className="sm:flex sm:absolute flex-wrap left-0 mb-5 mt-3 sm:my-0 sm:mx-2 mx-6 font-semibold">
+            <div className="sm:flex sm:absolute flex-wrap left-0 mb-5 mt-3 sm:my-0 sm:mx-0 mx-6 font-semibold w-full sm:bg-[#EFEFEF]">
                 {filter.values.map((value) => (
-                    <label key={value} className={`cursor-pointer mx-3 px-[8px] pt-[7px] pb-[4px] ${selectedFilters[filter.type].includes(value) ? 'bg-[#EFEFEF]' : ''}`}>
+                    <label key={value} className={`cursor-pointer mx-3 sm:my-2 px-2 pt-[3px]
+                                                 ${selectedFilters[filter.type].includes(value) ? 'bg-[#EFEFEF] sm:bg-black sm:text-white' : ''}`}>
                      <span>{value.toUpperCase()}</span>
                      <input
                        type="checkbox"
@@ -132,15 +134,15 @@ export default function Filtering({
           )}
       </div>
     </div>
-    <div className={`sm:absolute w-full flex flex-wrap bg-[#EFEFEF]
-                    ${(showFilter || showSort) && 'top-16'}`}>
+    <div className={`sm:absolute w-full px-3 flex flex-wrap bg-[#EFEFEF]
+                    ${(showFilter || showSort) && ' top-20'}`}>
      {filterTypes.map(({ key, label }) =>
        selectedFilters?.[key]?.map((filter) => (
          <button key={filter}
-           className=" px-2 py-2 flex items-center"
+           className=" py-2 flex items-center px-2"
            onClick={() => removeFilter(key, filter)}>
            <p>{label(filter)}</p>
-           <img className="w-[16px] ml-[1px] mb-[5px] sm:mb-[3px]" src={filterClose} alt="" />
+           <img className="w-[16px] ml-[1px] mb-[3px] sm:mb-[4px]" src={filterClose} alt="" />
          </button>
        ))
      )}
