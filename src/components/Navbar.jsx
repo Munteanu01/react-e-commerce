@@ -21,7 +21,7 @@ export default function Navbar(props){
 
     return(
         <nav className="z-50 fixed bg-white">
-            <div className="h-[50px] sm:px-5 px-3 md:pr-10 items-center flex w-[100vw]">
+            <div className="h-[50px] sm:px-5 px-3 md:pr-10 items-center flex w-screen">
                 <button className="w-[20px]">
                     <img src={props.menu} onClick={toggleMenu} alt="" />
                 </button>
@@ -42,12 +42,12 @@ export default function Navbar(props){
             <button className="flex w-[20px] pt-[18px] ml-auto">
                 <img src={props.close} onClick={toggleMenu} alt="" />
             </button>
-            <div className="pt-40 leading-9 font-black">
+            <div className="pt-40 leading-9 font-extrabold tracking-wider">
             <Link to={'/new'} onClick={toggleMenu}>NEW</Link>
             {collections.map((collection) => (
                 <div className="items-center"  key={collection.id}>
                     
-                    <div className="flex justify-between ">
+                    <div className="flex justify-between">
                         <Link to={`/${collection.slug}`} onClick={toggleMenu}>
                         <h1>{collection.name}</h1>
                         </Link>

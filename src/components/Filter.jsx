@@ -75,7 +75,7 @@ export default function Filtering({
   ];
   return (
   <div className="pb-10 relative text-[0.9rem]">
-    <div className="sm:flex justify-between font-black">
+    <div className="sm:flex justify-between font-bold">
       <div className="sm:flex">
         {filtersArr.map((filter) => (
           <div key={filter.type} className="">
@@ -85,7 +85,7 @@ export default function Filtering({
               <img className={`ml-1 w-[15px] h-[13px] mb-[4px] ${showFilter === filter.type ? " rotate-90" : " rotate-0"}`} src={arrow} alt="" />
             </button>
             {showFilter === filter.type &&
-            <div className="sm:flex sm:absolute flex-wrap left-0 mb-5 mt-3 sm:my-0 sm:mx-2 mx-6">
+            <div className="sm:flex sm:absolute flex-wrap left-0 mb-5 mt-3 sm:my-0 sm:mx-2 mx-6 font-semibold">
                 {filter.values.map((value) => (
                     <label key={value} className={`cursor-pointer mx-3 px-[8px] pt-[7px] pb-[4px] ${selectedFilters[filter.type].includes(value) ? 'bg-[#EFEFEF]' : ''}`}>
                      <span>{value.toUpperCase()}</span>
@@ -140,7 +140,7 @@ export default function Filtering({
            className=" px-2 py-2 flex items-center"
            onClick={() => removeFilter(key, filter)}>
            <p>{label(filter)}</p>
-           <img className="w-[15px] ml-[1px] mb-[5px] sm:mb-[2px]" src={filterClose} alt="" />
+           <img className="w-[16px] ml-[1px] mb-[5px] sm:mb-[3px]" src={filterClose} alt="" />
          </button>
        ))
      )}
