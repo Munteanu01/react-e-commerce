@@ -2,7 +2,9 @@ import { useState } from "react";
 import arrow from "../icons/arrow-black.png"
 import filterClose from "../icons/filter-close-white.png"
 import ascending from "../icons/ascending-black.png"
+import ascendingWhite from "../icons/ascending-white.png"
 import descending from "../icons/descending-black.png"
+import descendingWhite from "../icons/descending-white.png"
 
 export const Filter = (products) => {
   let sizesArr = [];
@@ -63,8 +65,8 @@ export default function Filtering({
     setShowFilter("");
   };
   const sortOptions = [
-    { value: 'price', label: 'PRICE', icon: ascending},
-    { value: '-price', label: 'PRICE', icon: descending},
+    { value: 'price', label: 'PRICE', icon: ascending, iconWhite: ascendingWhite},
+    { value: '-price', label: 'PRICE', icon: descending, iconWhite: descendingWhite},
     { value: 'name', label: 'NAME' },
     { value: 'recommended', label: 'RECOMMENDED' },
   ];
@@ -106,20 +108,20 @@ export default function Filtering({
         ))}
         </div>
         <div key="sort" className="">
-          <button className={`items-center flex pt-[7px] pb-[3px] px-2 justify-between w-full
+          <button className={`items-center flex pt-[7px] sm:pb-[10px] pb-1 px-2 justify-between w-full  
                     ${showSort && 'bg-[#EFEFEF]'}`}
                   onClick={handleSortHeaderClick}>
             <p className="">SORT</p>
-            <img className={`w-[15px] h-[13px] mb-[3px]  ${showSort ? " rotate-90" : " rotate-0"}`} src={arrow} alt="" />
+            <img className={`ml-1 w-[15px] h-[13px] mb-[4px]   ${showSort ? " rotate-90" : " rotate-0"}`} src={arrow} alt="" />
           </button>
           {showSort && (
-            <div className="flex justify-between sm:absolute right-0 text-[0.85rem] mx-2 my-3 sm:my-0"> 
+            <div className="flex justify-between sm:absolute sm:left-0 mb-5 mt-3 sm:justify-end sm:my-0 font-semibold w-full sm:bg-[#EFEFEF]"> 
               {sortOptions.map((option) => (
                 <label key={option.value} 
-                       className={`cursor-pointer block pt-[7px] pb-[4px] px-1 sm:mx-1
-                       ${selectedSort === option.value ? 'bg-[#EFEFEF]' : ''}`}>
+                       className={`cursor-pointer sm:mx-3 sm:my-2 px-1 sm:pt-[3px] sm:pb-0 pt-2 pb-1 w-full text-center sm:w-auto 
+                       ${selectedSort === option.value ? 'bg-black text-white' : ''}`}>
                   <span>{option.label}</span>
-                  {option.icon && <img  className="inline-block w-[15px] ml-1 pb-1" src={option.icon}/> }
+                  {option.icon && <img  className="inline-block w-[15px] ml-1 pb-1" src={selectedSort === option.value ? option.iconWhite : option.icon}/> }
                   <input
                     type="checkbox"
                     name="sort"
