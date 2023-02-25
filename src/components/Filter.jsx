@@ -94,7 +94,7 @@ export default function Filtering({
             <div className="sm:flex sm:absolute flex-wrap left-0 mb-5 mt-3 sm:my-0 sm:mx-0 mx-6 font-semibold w-full sm:bg-[#EFEFEF]">
                 {filter.values.map((value) => (
                     <label key={value} className={`cursor-pointer mx-3 sm:my-2 px-2 sm:pt-[3px] sm:pb-0 pt-2 pb-1
-                                                 ${selectedFilters[filter.type].includes(value) ? 'bg-[#EFEFEF] sm:bg-black sm:text-white' : ''}`}>
+                                                 ${selectedFilters[filter.type].includes(value) ? 'bg-[#EFEFEF] sm:bg-neutral-600 sm:text-white' : ''}`}>
                      <span>{value.toUpperCase()}</span>
                      <input
                        type="checkbox"
@@ -122,7 +122,7 @@ export default function Filtering({
               {sortOptions.map((option) => (
                 <label key={option.value} 
                        className={`cursor-pointer sm:mx-3 sm:my-2 px-1 sm:pt-[3px] sm:pb-0 pt-2 pb-1 w-full text-center sm:w-auto 
-                       ${selectedSort === option.value ? 'bg-black text-white' : ''}`}>
+                       ${selectedSort === option.value ? 'bg-neutral-600 text-white' : ''}`}>
                   <span>{option.label}</span>
                   {option.icon && <img  className="inline-block w-[15px] ml-1 pb-1" src={selectedSort === option.value ? option.iconWhite : option.icon}/> }
                   <input

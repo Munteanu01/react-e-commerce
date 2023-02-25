@@ -67,11 +67,11 @@ export default function Products({ products, filters }) {
   }
   
   return (
-    <div className="pt-16  mx-5 md:mx-10">
+    <div className="pt-16  mx-5 md:mx-10 max-w-[1600px] justify-center grid 2xl:mx-auto">
         <Filter removeFilter={removeFilter} products={products} filters={filters} handleFilterChange={handleFilterChange} selectedFilters={selectedFilters} selectedSort={selectedSort} handleSortChange={handleSortChange}/>
         
 {/*PRODUCTS*/}
-      <div className="grid grid-cols-2 justify-center md:grid-cols-3 gap-20">
+      <div className="grid grid-cols-2 md:grid-cols-3 justify-center  sm:gap-10 gap-4">
       {sortedProducts.map((product) => {
         const hasSelectedFilters =
           (selectedFilters.categories.length === 0 ||
