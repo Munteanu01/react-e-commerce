@@ -67,11 +67,11 @@ export default function Products({ products, filters }) {
   }
   
   return (
-    <div className="pt-16">
+    <div className="pt-16  mx-5 md:mx-10">
         <Filter removeFilter={removeFilter} products={products} filters={filters} handleFilterChange={handleFilterChange} selectedFilters={selectedFilters} selectedSort={selectedSort} handleSortChange={handleSortChange}/>
         
 {/*PRODUCTS*/}
-      <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-10 mx-12 pt-16">
+      <div className="grid grid-cols-2 justify-center md:grid-cols-3 gap-10 pt-16">
       {sortedProducts.map((product) => {
         const hasSelectedFilters =
           (selectedFilters.categories.length === 0 ||
