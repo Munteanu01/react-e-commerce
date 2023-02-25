@@ -32,14 +32,14 @@ export default function Searching({search, close}){
            <img className="w-[24px] sm:mx-5 mx-3" src={search} alt="" />
         </button>
         {searchMenu && (
-            <div className="fixed inset-0 bg-black flex justify-center items-center">
+            <div className="fixed inset-0 bg-white flex justify-center items-center">
                 <form onSubmit={handleSubmit}>
                     <button>
                        <img className="w-8 top-5 md:right-[76px] right-[10vw] absolute" src={close} alt="" onClick={toggleSearchMenu}/>
                     </button>
                     <input
                         type="search"
-                        className="mb-20 p-2 font-bold md:text-5xl text-3xl text-center text-white bg-transparent border-b-[6px] outline-none md:w-[50vw] w-[70vw]"
+                        className="mb-20 p-2 font-bold md:text-5xl text-3xl text-center bg-transparent border-b-[6px] border-black  outline-none md:w-[50vw] w-[70vw]"
                         value={searchQuery}
                         onChange={(event) => setSearchQuery(event.target.value)}
                         ref={searchInputRef}

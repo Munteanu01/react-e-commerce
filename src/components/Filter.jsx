@@ -1,10 +1,8 @@
 import { useState } from "react";
-import arrow from "../icons/arrow-white.png"
+import arrow from "../icons/arrow-black.png"
 import filterClose from "../icons/filter-close-white.png"
-import ascending from "../icons/ascending-white.png"
-import ascendingBlack from "../icons/ascending-black.png"
-import descending from "../icons/descending-white.png"
-import descendingBlack from "../icons/descending-black.png"
+import ascending from "../icons/ascending-black.png"
+import descending from "../icons/descending-black.png"
 
 export const Filter = (products) => {
   let sizesArr = [];
@@ -65,8 +63,8 @@ export default function Filtering({
     setShowFilter("");
   };
   const sortOptions = [
-    { value: 'price', label: 'PRICE', icon: ascending, iconBlack: ascendingBlack },
-    { value: '-price', label: 'PRICE', icon: descending, iconBlack: descendingBlack },
+    { value: 'price', label: 'PRICE', icon: ascending},
+    { value: '-price', label: 'PRICE', icon: descending},
     { value: 'name', label: 'NAME' },
     { value: 'recommended', label: 'RECOMMENDED' },
   ];
@@ -81,15 +79,15 @@ export default function Filtering({
       <div className="sm:flex">
         {filtersArr.map((filter) => (
           <div key={filter.type} className="">
-            <button className="items-center flex pt-[7px] pb-[3px] px-2 justify-between w-full"
+            <button className={`items-center flex pt-[7px] pb-[3px] px-2 justify-between w-full   ${showFilter === filter.type && ' bg-[#EFEFEF]'}`}
                     onClick={() => handleFilterHeaderClick(filter.type)}>
               <p className="">{filter.type?.toUpperCase()}</p> 
-              <img className={`ml-1 w-[15px] h-[13px] mb-[3px] ${showFilter === filter.type ? " rotate-90" : " rotate-0"}`} src={arrow} alt="" />
+              <img className={`ml-1 w-[15px] h-[13px] mb-[4px] ${showFilter === filter.type ? " rotate-90" : " rotate-0"}`} src={arrow} alt="" />
             </button>
             {showFilter === filter.type &&
             <div className="sm:flex sm:absolute flex-wrap left-0 mb-5 mt-3 sm:my-0 sm:mx-2 mx-6">
                 {filter.values.map((value) => (
-                    <label key={value} className={`cursor-pointer mx-3 px-[8px] pt-[7px] pb-[4px] ${selectedFilters[filter.type].includes(value) ? 'bg-white text-black' : ''}`}>
+                    <label key={value} className={`cursor-pointer mx-3 px-[8px] pt-[7px] pb-[4px] ${selectedFilters[filter.type].includes(value) ? 'bg-[#EFEFEF]' : ''}`}>
                      <span>{value.toUpperCase()}</span>
                      <input
                        type="checkbox"
@@ -106,7 +104,8 @@ export default function Filtering({
         ))}
         </div>
         <div key="sort" className="">
-          <button className="items-center flex pt-[7px] pb-[3px] px-2 justify-between w-full"
+          <button className={`items-center flex pt-[7px] pb-[3px] px-2 justify-between w-full
+                    ${showSort && 'bg-[#EFEFEF]'}`}
                   onClick={handleSortHeaderClick}>
             <p className="">SORT</p>
             <img className={`w-[15px] h-[13px] mb-[3px]  ${showSort ? " rotate-90" : " rotate-0"}`} src={arrow} alt="" />
@@ -116,9 +115,9 @@ export default function Filtering({
               {sortOptions.map((option) => (
                 <label key={option.value} 
                        className={`cursor-pointer block pt-[7px] pb-[4px] px-1 sm:mx-1
-                       ${selectedSort === option.value ? 'bg-white text-black' : ''}`}>
+                       ${selectedSort === option.value ? 'bg-[#EFEFEF]' : ''}`}>
                   <span>{option.label}</span>
-                  {option.icon && <img  className="inline-block w-[15px] ml-1 pb-1" src={selectedSort === option.value ? option.iconBlack : option.icon}/> }
+                  {option.icon && <img  className="inline-block w-[15px] ml-1 pb-1" src={option.icon}/> }
                   <input
                     type="checkbox"
                     name="sort"
@@ -133,7 +132,7 @@ export default function Filtering({
           )}
       </div>
     </div>
-    <div className={`sm:absolute w-full flex flex-wrap bg-neutral-900
+    <div className={`sm:absolute w-full flex flex-wrap bg-[#EFEFEF]
                     ${(showFilter || showSort) && 'top-16'}`}>
      {filterTypes.map(({ key, label }) =>
        selectedFilters?.[key]?.map((filter) => (
@@ -141,7 +140,7 @@ export default function Filtering({
            className=" px-2 py-2 flex items-center"
            onClick={() => removeFilter(key, filter)}>
            <p>{label(filter)}</p>
-           <img className="w-[12px] h-[12px] ml-[3px] mb-[5px] sm:mb-[2px]" src={filterClose} alt="" />
+           <img className="w-[15px] ml-[1px] mb-[5px] sm:mb-[2px]" src={filterClose} alt="" />
          </button>
        ))
      )}

@@ -8,13 +8,13 @@ import Collection from './pages/Collection';
 import Product from './pages/Product'
 import Search from './pages/Search'
 import Account from './pages/Account'
-import menu from '/src/icons/menu-white.png'
-import eye from '/src/icons/eye-white.png'
-import account from '/src/icons/account-white.png'
-import search from '/src/icons/search-white.png'
-import cart from '/src/icons/cart-white.png'
-import close from '/src/icons/close-white.png'
-import arrow from '/src/icons/arrow-white.png'
+import menu from '/src/icons/menu-black.png'
+import eye from '/src/icons/eye-black.png'
+import account from '/src/icons/account-black.png'
+import search from '/src/icons/search-black.png'
+import cart from '/src/icons/cart-black.png'
+import close from '/src/icons/close-black.png'
+import arrow from '/src/icons/arrow-black.png'
 import Cart from './pages/Cart';
 
 export default function App(){

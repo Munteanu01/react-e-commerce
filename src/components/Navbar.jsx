@@ -20,7 +20,7 @@ export default function Navbar(props){
 
 
     return(
-        <nav className="z-50 fixed bg-black">
+        <nav className="z-50 fixed bg-white">
             <div className="h-[50px] sm:px-5 px-3 md:pr-10 items-center flex w-[100vw]">
                 <button className="w-[20px]">
                     <img src={props.menu} onClick={toggleMenu} alt="" />
@@ -38,11 +38,11 @@ export default function Navbar(props){
 
         </div>
 
-        <div className={`${ menuIsOpen ? "left-[0px]" : "left-[-350px]"} md:pl-[40px] pl-[20px] pr-5 block absolute w-[260px] h-[100vh] inset-0 bg-black transition-all ease-in-out`}>
+        <div className={`${ menuIsOpen ? "left-[0px]" : "left-[-350px]"} md:pl-[40px] pl-[20px] pr-5 block absolute w-[260px] h-[100vh] inset-0 bg-white text-black transition-all ease-in-out`}>
             <button className="flex w-[20px] pt-[18px] ml-auto">
                 <img src={props.close} onClick={toggleMenu} alt="" />
             </button>
-            <div className="pt-40 leading-9 font-bold text-white">
+            <div className="pt-40 leading-9 font-black">
             <Link to={'/new'} onClick={toggleMenu}>NEW</Link>
             {collections.map((collection) => (
                 <div className="items-center"  key={collection.id}>
