@@ -79,7 +79,7 @@ export default function Filtering({
       <div className="sm:flex">
         {filtersArr.map((filter) => (
           <div key={filter.type} className="">
-            <button className={`items-center flex pt-[7px] pb-[10px] px-2 justify-between w-full  
+            <button className={`items-center flex pt-[7px] sm:pb-[10px] pb-1 px-2 justify-between w-full  
                                ${showFilter === filter.type && ' bg-[#EFEFEF]'}`}
                     onClick={() => handleFilterHeaderClick(filter.type)}>
               <p className="">{filter.type?.toUpperCase()}</p> 
@@ -88,7 +88,7 @@ export default function Filtering({
             {showFilter === filter.type &&
             <div className="sm:flex sm:absolute flex-wrap left-0 mb-5 mt-3 sm:my-0 sm:mx-0 mx-6 font-semibold w-full sm:bg-[#EFEFEF]">
                 {filter.values.map((value) => (
-                    <label key={value} className={`cursor-pointer mx-3 sm:my-2 px-2 pt-[3px]
+                    <label key={value} className={`cursor-pointer mx-3 sm:my-2 px-2 sm:pt-[3px] sm:pb-0 pt-2 pb-1
                                                  ${selectedFilters[filter.type].includes(value) ? 'bg-[#EFEFEF] sm:bg-black sm:text-white' : ''}`}>
                      <span>{value.toUpperCase()}</span>
                      <input
