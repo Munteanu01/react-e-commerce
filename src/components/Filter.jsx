@@ -75,8 +75,11 @@ export default function Filtering({
     { key: 'colors', label: (color) => color.toUpperCase() },
     { key: 'categories', label: (category) => category.toUpperCase() },
   ];
+  const hasSelectedFilters = Object.values(selectedFilters).some(
+    (selectedValues) => selectedValues.length > 0
+  );
   return (
-  <div className="pb-10 relative text-[0.9rem]">
+  <div className={`relative text-[0.9rem] ${(showFilter || showSort || hasSelectedFilters) ? 'mb-24' : 'mb-5'}`}>
     <div className="sm:flex justify-between font-bold">
       <div className="sm:flex">
         {filtersArr.map((filter) => (
