@@ -32,12 +32,12 @@ export default function Product({ products }) {
   return  (
     <>
       {product ? (
-        <div className="pt-10 p-3 justify-center grid">
+        <div className="pt-10 p-3 justify-center grid xl:grid-cols-2 min-h-[90vh] items-center">
           <div className="mt-5">
-            <img src={product.image.url} alt="" />
+            <img className=" max-h-[80vh]" src={product.image.url} alt="" />
           </div>
-          <div className="pl-5 py-3">
-            <h1 className="text-lg">{product.name.toUpperCase()}</h1>
+          <div className="p-5">
+            <h1 className="text-xl">{product.name.toUpperCase()}</h1>
             {!product.sizes.includes("UNIQUE") && (
               <div className="mt-3 mb-5">
                 <h1 className="pb-1">SIZE</h1>
