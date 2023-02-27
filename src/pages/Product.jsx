@@ -32,15 +32,15 @@ export default function Product({ products }) {
   return  (
     <>
       {product ? (
-        <div className="pt-10 p-3 justify-center grid xl:grid-cols-2 min-h-[90vh] items-center">
+        <div className="pt-10 p-3 justify-center grid xl:grid-cols-3 min-h-[95vh] items-center">
           <div className="mt-5">
             <img className=" max-h-[80vh]" src={product.image.url} alt="" />
           </div>
-          <div className="p-5">
-            <h1 className="text-xl">{product.name.toUpperCase()}</h1>
+          <div className="p-5 xl:p-24 flex flex-col justify-between h-full">
+            <h1 className="text-xl xl:text-2xl">{product.name.toUpperCase()}</h1>
             {!product.sizes.includes("UNIQUE") && (
               <div className="mt-3 mb-5">
-                <h1 className="pb-1">SIZE</h1>
+                <h1 className="pb-2 xl:pb-3">SIZE :</h1>
                 {product.sizes.map((size) => (
                   <label key={size} className={`px-2 mx-2 py-1 cursor-pointer
                                     ${selectedSize === size ? 'bg-black text-white' : ''}`}>
