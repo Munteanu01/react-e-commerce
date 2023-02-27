@@ -88,7 +88,8 @@ export default function Filtering({
                                ${showFilter === filter.type && ' bg-[#EFEFEF]'}`}
                     onClick={() => handleFilterHeaderClick(filter.type)}>
               <p className="">{filter.type?.toUpperCase()}</p> 
-              <img className={`ml-1 w-[15px] h-[13px] mb-[4px] ${showFilter === filter.type ? " rotate-90" : " rotate-0"}`} src={arrow} alt="" />
+              <img className={`ml-1 w-[15px] h-[13px] mb-[4px] 
+                   ${showFilter === filter.type ? " rotate-90" : " rotate-0"}`} src={arrow} alt="" />
             </button>
             {showFilter === filter.type &&
             <div className="sm:flex sm:absolute flex-wrap left-0 mb-5 mt-3 sm:my-0 sm:mx-0 mx-6 font-semibold w-full sm:bg-[#EFEFEF]">
@@ -121,18 +122,12 @@ export default function Filtering({
             <div className="flex justify-between sm:absolute sm:left-0 mb-5 mt-3 sm:justify-end sm:my-0 font-semibold w-full sm:bg-[#EFEFEF]"> 
               {sortOptions.map((option) => (
                 <label key={option.value} 
-                       className={`cursor-pointer sm:mx-3 sm:my-2 px-1 sm:pt-[3px] sm:pb-0 pt-2 pb-1 w-full text-center sm:w-auto 
+                       className={`cursor-pointer sm:mx-3 sm:my-2 px-[2px] sm:px-2 sm:pt-[3px] sm:pb-0 pt-2 pb-1 w-full text-center sm:w-auto 
                        ${selectedSort === option.value ? 'bg-neutral-600 text-white' : ''}`}>
                   <span>{option.label}</span>
                   {option.icon && <img  className="inline-block w-[15px] ml-1 pb-1" src={selectedSort === option.value ? option.iconWhite : option.icon}/> }
-                  <input
-                    type="checkbox"
-                    name="sort"
-                    value={option.value}
-                    checked={selectedSort === option.value}
-                    onChange={handleSortChange}
-                    className="hidden"
-                  />
+                  <input type="checkbox" name="sort" value={option.value} checked={selectedSort === option.value}
+                        onChange={handleSortChange} className="hidden"/>
                 </label>
               ))}
             </div>

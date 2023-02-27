@@ -33,18 +33,20 @@ export default function Searching({search, close}){
         </button>
         {searchMenu && (
             <div className="fixed inset-0 bg-white flex justify-center items-center">
-                <form onSubmit={handleSubmit}>
+                <form className=" mb-16  font-bold" onSubmit={handleSubmit}>
                     <button>
                        <img className="w-8 top-5 md:right-[76px] right-[10vw] absolute" src={close} alt="" onClick={toggleSearchMenu}/>
                     </button>
                     <input
                         type="search"
-                        className="mb-20 p-2 font-bold md:text-5xl text-3xl text-center bg-transparent border-b-[6px] border-black  outline-none md:w-[50vw] w-[70vw]"
+                        className="p-2 md:text-5xl text-3xl text-center bg-transparent border-b-[6px] border-black  outline-none md:w-[50vw] w-[70vw]"
                         value={searchQuery}
                         onChange={(event) => setSearchQuery(event.target.value)}
                         ref={searchInputRef}
                     />
+                    <p className="text-end pt-4">PRESS ENTER TO SEARCH  <br/> OR ESC TO CLOSE</p>
                 </form>
+                
             </div>
         )}
         </>
