@@ -16,6 +16,7 @@ import cart from '/src/icons/cart-black.png'
 import close from '/src/icons/close-black.png'
 import arrow from '/src/icons/arrow-black.png'
 import Cart from './pages/Cart';
+import Checkout from './pages/Checkout'
 
 export default function App(){
   const [data, setData] = useState({ backgrounds: [], collections: [], products: [] })
@@ -63,6 +64,7 @@ export default function App(){
         <Route path='/search/:query' element={<Search products={data.products}/>}/>
         <Route path='/account' element={<Account />}/>
         <Route path='/cart' element={<Cart />}/>
+        <Route path='/checkout' element={<Checkout />}/>
       </Routes>
     </>
   )
