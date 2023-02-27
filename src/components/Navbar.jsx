@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Searching from "./Searching";
 
 export default function Navbar(props){
@@ -8,6 +8,19 @@ export default function Navbar(props){
     const toggleMenu = () => {
         setMenuIsOpen(!menuIsOpen);
     };
+    useEffect(() => {
+         setMenuIsOpen(false);
+
+        const handlePopstate = () => {
+            setMenuIsOpen(false);
+        };
+
+        window.addEventListener("popstate", handlePopstate);
+
+        return () => {
+            window.removeEventListener("popstate", handlePopstate);
+        };
+    }, []);
     const [collectionStates, setCollectionStates] = useState({});
     const toggleCollection = (collectionId) => {
         setCollectionStates((prevState) => {

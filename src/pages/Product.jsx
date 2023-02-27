@@ -32,9 +32,11 @@ export default function Product({ products }) {
   return  (
     <>
       {product ? (
-        <div className=" pt-80 flex">
-          <img className="w-[200px]" src={product.image.url} alt="" />
-          <h1>{product.name}</h1>
+        <div className="pt-10 p-3">
+          <div className="mt-4 sm:p-20">
+            <img src={product.image.url} alt="" />
+          </div>
+          <h1 className="p-2 text-lg">{product.name.toUpperCase()}</h1>
           {!product.sizes.includes("UNIQUE") && (
            <div>
              <label htmlFor="size">Size:</label>

@@ -15,7 +15,7 @@ export default function ProductCard({ product, hasSelectedFilters }) {
                 <img src={product.image.url} alt="" />
              
               </div>
-              <div className="grid grid-cols-4 pt-2 px-1 justify-between lg:text-lg">
+              <div className="grid grid-cols-4 pt-2 px-1 justify-between  text-sm sm:text-base lg:text-lg">
                  <p className="col-span-3">{product.name.toUpperCase()}</p>
                  <p className="text-end col-span-1">{product.price}  €</p>
               </div>

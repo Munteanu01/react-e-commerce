@@ -79,7 +79,7 @@ export default function Filtering({
     (selectedValues) => selectedValues.length > 0
   );
   return (
-  <div className={`relative text-[0.9rem] ${(showFilter || showSort || hasSelectedFilters) ? 'mb-24' : 'mb-5'}`}>
+  <div className={`relative text-[0.9rem] ${(showFilter || showSort || hasSelectedFilters) ? 'sm:mb-24 mb-6' : 'mb-5'}`}>
     <div className="sm:flex justify-between font-bold">
       <div className="sm:flex">
         {filtersArr.map((filter) => (
