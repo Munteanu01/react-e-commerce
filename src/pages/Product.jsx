@@ -37,7 +37,10 @@ export default function Product({ products }) {
             <img className=" max-h-[80vh]" src={product.image.url} alt="" />
           </div>
           <div className="p-5 xl:p-24 flex flex-col justify-between h-full">
-            <h1 className="text-xl xl:text-2xl">{product.name.toUpperCase()}</h1>
+            <div>
+              <h1 className="text-xl xl:text-2xl">{product.name.toUpperCase()}</h1>
+              <h1 className="text-lg xl:text-xl pt-2 font-bold">{product.price} €</h1>
+            </div>
             {!product.sizes.includes("UNIQUE") && (
               <div className="mt-3 mb-5">
                 <h1 className="pb-2 xl:pb-3">SIZE :</h1>
