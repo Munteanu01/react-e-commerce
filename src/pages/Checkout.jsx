@@ -33,14 +33,14 @@ export default function CheckoutForm() {
   }
   else{
     return (
-     <div className="pt-24">
-        <div className="flex justify-center font-bold">
+     <div className="pt-24 mx-3 sm:mx-32 lg:mx-auto max-w-[900px]">
+        <div className="justify-center font-extrabold hidden sm:flex">
         <div className="flex">
             <p className="rounded-full bg-black text-white border-2 border-transparent mr-3  px-[9px] pt-[5px] pb-[3px] text-xs font-extrabold">1</p>
             <button className="pt-1" onClick={() => {setPaymentSection(false); setDeliverySection(true)}}>DELIVERY</button>
           </div>
           
-          <div className={`w-20 border-b-2 flex my-auto mx-5 ${paymentSection ? 'border-black' : 'border-[#949494]'}`}/>
+          <div className={`w-full border-b-2 flex my-auto mx-6 ${paymentSection ? 'border-black' : 'border-[#949494]'}`}/>
 
           <div className={`flex  ${paymentSection ? 'text-black' :  'text-[#949494]' }`}>
             <p className={`rounded-full  border-2 border-[#949494] mr-3  px-[9px] pt-[5px] pb-[3px] text-xs font-extrabold 
@@ -49,45 +49,63 @@ export default function CheckoutForm() {
           </div>
         </div>
         {deliverySection && (
-          <div>
-          <h1>DELIVERY</h1>
+          <div className="py-10">
           <form onSubmit={() => {setPaymentSection(true); setDeliverySection(false)}}>
-            <label htmlFor="firstName">First Name:</label>
-            <input type="text" id="firstName" name="firstName" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
-            <br />
-            <label htmlFor="lastName">Last Name:</label>
-            <input type="text" id="lastName" name="lastName" value={lastName} onChange={(e) => setLastName(e.target.value)} />
-            <br />
-            <label htmlFor="email">Email:</label>
-            <input type="email" id="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-            <br />
-            <label htmlFor="mobileNumber">Mobile Number:</label>
-            <input type="tel" id="mobileNumber" name="mobileNumber" value={mobileNumber} onChange={(e) => setMobileNumber(e.target.value)} />
-            <br />
-            <label htmlFor="address">Address:</label>
-            <input type="text" id="address" name="address" value={address} onChange={(e) => setAddress(e.target.value)} />
-            <br />
-            <label htmlFor="furtherInformation">Further Information:</label>
-            <input type="text" id="furtherInformation" name="furtherInformation" value={furtherInformation} onChange={(e) => setFurtherInformation(e.target.value)} />
-            <br />
-            <label htmlFor="postalCode">ZIP/Postal Code:</label>
-            <input type="text" id="postalCode" name="postalCode" value={postalCode} onChange={(e) => setPostalCode(e.target.value)} />
-            <br />
-            <label htmlFor="town">Town:</label>
-            <input type="text" id="town" name="town" value={town} onChange={(e) => setTown(e.target.value)} />
-            <br />
-            <label htmlFor="district">District:</label>
-            <input type="text" id="district" name="district" value={district} onChange={(e) => setDistrict(e.target.value)} />
-            <br />
-            <label htmlFor="country">Country:</label>
-            <select id="country" name="country" value={country} onChange={(e) => setCountry(e.target.value)}>
-              <option value="">Select Country</option>
-              <option value="Romania">Romania</option>
-              <option value="United Kingdom">United Kingdom</option>
-              <option value="Germany">Germany</option>
-            </select>
-            <br />
-            <button type="submit">Continue to Payment</button>
+            
+            <h1 className="font-bold pb-3 col-span-2">PERSONAL DETAILS</h1>
+            <div className="grid lg:grid-cols-2 lg:gap-4 gap-2 pb-6">
+              <input  className="bg-[#f7f7f7] pl-3 w-full pt-4 pb-3 my-1 text-sm focus:outline-none text-neutral-500
+                                placeholder:text-[#a7a7a7] placeholder:text-xs placeholder:tracking-wider placeholder:translate-y-[-2px]
+                                focus:placeholder:text-[0.60rem] focus:placeholder:translate-y-[-15px]" 
+                      placeholder="First Name" required type="text" id="firstName" name="firstName" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
+              <input  className="bg-[#f7f7f7] pl-3 w-full pt-4 pb-3 my-1 text-sm focus:outline-none text-neutral-500
+                                placeholder:text-[#a7a7a7] placeholder:text-xs placeholder:tracking-wider placeholder:translate-y-[-2px]
+                                focus:placeholder:text-[0.60rem] focus:placeholder:translate-y-[-15px] " 
+                      placeholder="Last Name" required type="text" id="lastName" name="lastName" value={lastName} onChange={(e) => setLastName(e.target.value)} />
+              <input  className="bg-[#f7f7f7] pl-3 w-full pt-4 pb-3 my-1 text-sm focus:outline-none text-neutral-500
+                                placeholder:text-[#a7a7a7] placeholder:text-xs placeholder:tracking-wider placeholder:translate-y-[-2px]
+                                focus:placeholder:text-[0.60rem] focus:placeholder:translate-y-[-15px] " 
+                      placeholder="E-mail" required type="email" id="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+              <input  className="bg-[#f7f7f7] pl-3 w-full pt-4 pb-3 my-1 text-sm focus:outline-none text-neutral-500
+                                placeholder:text-[#a7a7a7] placeholder:text-xs placeholder:tracking-wider placeholder:translate-y-[-2px]
+                                focus:placeholder:text-[0.60rem] focus:placeholder:translate-y-[-15px] " 
+                      placeholder="Mobile Number" required type="tel" id="mobileNumber" name="mobileNumber" value={mobileNumber} onChange={(e) => setMobileNumber(e.target.value)} />
+            </div>
+
+            <h1 className="font-bold pb-3 col-span-2">DELIVERY DETAILS</h1>
+            <div className="grid grid-cols-2 lg:grid-cols-4  lg:gap-4 gap-2 pb-6">
+              <input  className="bg-[#f7f7f7] pl-3 w-full pt-4 pb-3 my-1 text-sm focus:outline-none text-neutral-500 col-span-2
+                                  placeholder:text-[#a7a7a7] placeholder:text-xs placeholder:tracking-wider placeholder:translate-y-[-2px]
+                                  focus:placeholder:text-[0.60rem] focus:placeholder:translate-y-[-15px]" 
+                      placeholder="Address" required  type="text" id="address" name="address" value={address} onChange={(e) => setAddress(e.target.value)} />
+              <input  className="bg-[#f7f7f7] pl-3 w-full pt-4 pb-3 my-1 text-sm focus:outline-none text-neutral-500 col-span-2
+                                  placeholder:text-[#a7a7a7] placeholder:text-xs placeholder:tracking-wider placeholder:translate-y-[-2px]
+                                  focus:placeholder:text-[0.60rem] focus:placeholder:translate-y-[-15px] " 
+                      placeholder="Further information (Optional)" type="text" id="furtherInformation" name="furtherInformation" value={furtherInformation} onChange={(e) => setFurtherInformation(e.target.value)} />
+              <input  className="bg-[#f7f7f7] pl-3 w-full pt-4 pb-3 my-1 text-sm focus:outline-none text-neutral-500
+                                  placeholder:text-[#a7a7a7] placeholder:text-xs placeholder:tracking-wider placeholder:translate-y-[-2px]
+                                  focus:placeholder:text-[0.60rem] focus:placeholder:translate-y-[-15px] " 
+                      placeholder="ZIP/Postal code" required type="text" id="postalCode" name="postalCode" value={postalCode} onChange={(e) => setPostalCode(e.target.value)} />
+              <input  className="bg-[#f7f7f7] pl-3 w-full pt-4 pb-3 my-1 text-sm focus:outline-none text-neutral-500
+                                  placeholder:text-[#a7a7a7] placeholder:text-xs placeholder:tracking-wider placeholder:translate-y-[-2px]
+                                  focus:placeholder:text-[0.60rem] focus:placeholder:translate-y-[-15px] " 
+                      placeholder="Town" required type="text" id="town" name="town" value={town} onChange={(e) => setTown(e.target.value)} />
+              <input  className="bg-[#f7f7f7] pl-3 w-full pt-4 pb-3 my-1 text-sm focus:outline-none text-neutral-500
+                                  placeholder:text-[#a7a7a7] placeholder:text-xs placeholder:tracking-wider placeholder:translate-y-[-2px]
+                                  focus:placeholder:text-[0.60rem] focus:placeholder:translate-y-[-15px] " 
+                      placeholder="District" required type="text" id="district" name="district" value={district} onChange={(e) => setDistrict(e.target.value)} />
+              <select className="bg-[#f7f7f7] pl-3 w-full pt-4 pb-3 my-1 text-sm focus:outline-none text-neutral-500 
+                                 placeholder:text-[#a7a7a7] placeholder:text-xs placeholder:tracking-wider placeholder:translate-y-[-2px] 
+                                 focus:placeholder:text-[0.60rem] focus:placeholder:translate-y-[-15px]"
+                      placeholder="Country" required id="country" name="country" value={country} onChange={(e) => setCountry(e.target.value)}>
+                      <option value="">Select Country</option>
+                      <option value="Romania">Romania</option>
+                      <option value="United Kingdom">United Kingdom</option>
+                      <option value="Germany">Germany</option>
+              </select>
+              <button className="col-span-2 bg-black pt-4 mt-5 pb-3 lg:rounded-xl text-white text-lg font-bold" type="submit">CONTINUE TO PAYMENT</button>
+            </div>
+            
           </form>
         </div>
         )}
