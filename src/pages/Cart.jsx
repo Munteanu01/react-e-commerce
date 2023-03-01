@@ -26,6 +26,8 @@ export default function Cart() {
     localStorage.setItem("cartItems", JSON.stringify(updatedItems));
   };
   const totalPrice = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
+  const finalPrice = totalPrice >= 80 ? totalPrice : totalPrice + 20;
+  localStorage.setItem("finalPrice", finalPrice);
   const [showDeliveryInfo, setShowDeliveryInfo] = useState(true);
   
   if(cartItems.length > 0){
@@ -81,7 +83,7 @@ export default function Cart() {
               </div>
               <div className="p-2 py-4 flex justify-between">
                 <p>TOTAL</p>
-                <p>{ totalPrice >= 80 ? totalPrice : totalPrice + 20} €</p>
+                <p>{finalPrice} €</p>
               </div>
               
             </div>
