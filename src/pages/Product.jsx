@@ -43,10 +43,10 @@ export default function Product({ products }) {
             </div>
             {!product.sizes.includes("UNIQUE") && (
               <div className="mt-3 mb-5">
-                <h1 className="pb-2 xl:pb-3">SIZE :</h1>
+                <h1 className="pb-2 xl:pb-5 font-semibold">SIZE <span className="pl-2 text-neutral-500">{selectedSize}</span></h1>
                 {product.sizes.map((size) => (
-                  <label key={size} className={`px-2 mx-2 py-1 cursor-pointer
-                                    ${selectedSize === size ? 'bg-black text-white' : ''}`}>
+                  <label key={size} className={`px-5 mr-2 py-2 cursor-pointer border-[3px] 
+                                    ${selectedSize === size ? 'border-black' : ' border-transparent'}`}>
                     <input type="checkbox" name="size" value={size} checked={selectedSize === size} 
                           onChange={(e) => setSelectedSize(e.target.checked ? size : "")} className="hidden" />
                     {size}
