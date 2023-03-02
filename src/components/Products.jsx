@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import Filter from "./Filter";
 import ProductCard from "./ProductCard";
+import noResults from '../icons/no-results-2.png'
 
 export default function Products({ products, filters }) {
   const [selectedSort, setSelectedSort] = useState("recommended");
@@ -73,14 +74,15 @@ export default function Products({ products, filters }) {
   });
 
   return (
-    <div className="pt-16 mx-5 md:mx-10 max-w-[1600px] justify-center grid 2xl:mx-auto">
+    <div className="py-16 mx-5 md:mx-10 max-w-[1600px] justify-center grid 2xl:mx-auto">
       <Filter removeFilter={removeFilter} products={products} filters={filters} handleFilterChange={handleFilterChange}
               selectedFilters={selectedFilters} selectedSort={selectedSort} handleSortChange={handleSortChange}/>
       <div className="grid grid-cols-2 md:grid-cols-3 justify-center sm:gap-10 gap-4">
         {filteredProducts.length === 0 ? (
-          <div className="text-center mt-10 text-gray-500">
-            No products for this filter
-          </div>
+        <>
+          <img className="xl:max-w-sm flex mx-auto mt-12" src={noResults} alt="" />
+          <p className="sm:text-2xl  text-center break-words items-center ml-auto md:px-10 flex font-extrabold mt-14 leading-8 md:col-span-2">We're sorry, we couldn't find any matching products.</p>
+        </>
         ) : (
           filteredProducts.map((product) => (
             <ProductCard product={product} hasSelectedFilters={true} key={product.id}/>

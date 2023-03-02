@@ -28,15 +28,7 @@ export const Filter = (products) => {
   return { sizesArr, colorsArr, categoriesArr };
 };
 
-export default function Filtering({
-  products,
-  filters,
-  removeFilter,
-  handleFilterChange,
-  selectedFilters,
-  selectedSort,
-  handleSortChange,
-}) {
+export default function Filtering({products, filters, removeFilter, handleFilterChange, selectedFilters, selectedSort, handleSortChange,}) {
   const { sizesArr, colorsArr, categoriesArr } = Filter(products);
   const filtersArr = filters
     ? filters.map((filter) => ({
