@@ -29,9 +29,9 @@ export default function CheckoutForm() {
   };
   if(showThankYou){
     return(
-      <div className="h-screen py-[25vh] text-center flex flex-col  justify-between">
+      <div className="h-screen justify-center text-center flex flex-col">
           <img className=" sm:max-w-sm max-w-xs mx-auto px-14" src={thankYouSticker} alt="" />
-          <p className="text-xl font-extrabold">Click <Link to={'/'} className="underline hover:line-through">here</Link> to go to main page</p>
+          <p className="text-xl font-extrabold mt-10">Click <Link to={'/'} className="underline hover:line-through">here</Link> to go to main page</p>
       </div>
     )
   }
