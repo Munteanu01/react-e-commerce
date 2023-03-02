@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import close from '../icons/close-black.png'
 import info from '../icons/info.png'
+import emptyBox from '../icons/empty-box.png'
 
 export default function Cart() {
   const [cartItems, setCartItems] = useState(() => {
@@ -105,9 +106,13 @@ export default function Cart() {
     );
   } else{
     return(
-      <div className="pt-40 text-2xl lg:text-3xl leading-10 px-10 text-center">
-      You have no items in your shopping cart <br/>
-      Click <Link to={'/new'} className="text-red-500"> here</Link> to continue shopping.</div>
+      <div className="h-screen py-[25vh] text-center flex flex-col  justify-between">
+        <img className="sm:max-w-[416px] max-w-xs mx-auto px-14" src={emptyBox} alt="" />
+        <p className="text-xl font-extrabold pt-10 leading-8">
+          You have no products in your cart <br />
+          Click <Link to={'/new'} className="underline hover:line-through"> here</Link> to start shopping.
+        </p>
+      </div>
     )
   }
 
