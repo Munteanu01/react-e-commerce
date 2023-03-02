@@ -24,11 +24,10 @@ export default function Navbar(props){
     const [collectionStates, setCollectionStates] = useState({});
     const toggleCollection = (collectionId) => {
         setCollectionStates((prevState) => {
-            return {
-                ...prevState,
-                [collectionId]: !prevState[collectionId],
-            };
-        });
+            const newState = {};
+            collections.forEach((collection) => {newState[collection.id] = collection.id === collectionId ? !prevState[collectionId] : false;});
+            return newState;
+          });
     };
 
 
@@ -55,7 +54,7 @@ export default function Navbar(props){
             <button className="flex w-[20px] pt-[18px] ml-auto">
                 <img src={props.close} onClick={toggleMenu} alt="" />
             </button>
-            <div className="pt-40 leading-9 font-extrabold tracking-wider">
+            <div className="sm:pt-24 pt-12 leading-9 font-extrabold tracking-wider">
             <Link to={'/new'} onClick={toggleMenu}>NEW</Link>
             {collections.map((collection) => (
                 <div className="items-center"  key={collection.id}>
@@ -70,10 +69,10 @@ export default function Navbar(props){
                         </button>)}
                     </div>
 
-                    <div className={ collectionStates[collection.id] ? "block" : "hidden"}>
+                    <div className={collectionStates[collection.id] ? "block" : "hidden"}>
                         {collection.categories.map((category) => (
-                            <Link to={`/${collection.slug}/${category}`} onClick={toggleMenu} key={category}>
-                            <h1 className="pl-5" >{category.toUpperCase()}</h1>
+                            <Link to={`/${collection.slug}/${category.replace(/_/g, "-")}`} onClick={toggleMenu} key={category}>
+                                <h1 className="pl-5">{category.replace(/_/g, " ").toUpperCase()}</h1>
                             </Link>
                         ))}
                     </div>
