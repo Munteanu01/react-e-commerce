@@ -35,7 +35,7 @@ export default function App(){
           categories,
           products { name }
         },
-        products{
+        products(first: 1000){
           id,
           slug,
           name,
@@ -55,7 +55,7 @@ export default function App(){
   
   return (
     <>
-      <Navbar collections={data.collections} menu={menu} eye={eye} close={close}account={account} search={search} cart={cart} arrow={arrow}/>
+      <Navbar collections={data.collections} menu={menu} eye={eye} close={close} account={account} search={search} cart={cart} arrow={arrow}/>
       <Routes>
         <Route path='*' element={<Home backgrounds={data.backgrounds} />} />
         <Route path='/new' element={<New products={data.products}/>} />

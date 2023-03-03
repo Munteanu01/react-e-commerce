@@ -89,9 +89,8 @@ export default function Filtering({products, filters, removeFilter, handleFilter
               {filter.values.map((value) => (
                   <label key={value} className={`cursor-pointer mx-3 sm:my-2 px-2 sm:pt-[3px] sm:pb-0 pt-2 pb-1 `}>
                     {showFilter === 'colors' ? 
-                      <div className={`sm:h-full sm:w-7 h-6 w-6  inline-block
-                        ${value === 'black' || value === 'white' ? 'bg-'+value : 'bg-'+value+'-500'}
-                        ${selectedFilters[filter.type].includes(value) && 'border-[3px] border-neutral-600'}`}>
+                      <div className={`sm:h-full sm:w-7 h-6 w-6  inline-block ${selectedFilters[filter.type].includes(value) && 'border-[3px] border-neutral-600'}`}
+                           style={{ backgroundColor: value }}>
                       </div>
                     : <span className={`pt-[9px] pb-[6px] px-3
                             ${selectedFilters[filter.type].includes(value) ? 'bg-[#EFEFEF] sm:bg-neutral-600 sm:text-white' : ''}`}>
