@@ -7,9 +7,11 @@ export default function Search({ products }){
     const keywords = query.split("+");
     const searchedProducts = products.filter(product => {
         const matchingKeywords = keywords.filter(keyword => 
-            product.colors.toLowerCase() === (keyword) || 
-            product.name.toLowerCase().includes(keyword) || 
-            product.sizes.some(size => size.toLowerCase() === keyword)
+            product.collections.some(collection => collection.name.toLowerCase().includes(keyword))|| 
+            product.categories.some(category => category.toLowerCase().includes(keyword)) || 
+            product.colors.some(color => color.toLowerCase() === keyword) || 
+            product.sizes.some(size => size.toLowerCase() === keyword) || 
+            product.name.toLowerCase().includes(keyword) 
         );
         return matchingKeywords.length === keywords.length;
     });

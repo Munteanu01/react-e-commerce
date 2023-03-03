@@ -84,10 +84,10 @@ export default function Filtering({products, filters, removeFilter, handleFilter
                    ${showFilter === filter.type ? " rotate-90" : " rotate-0"}`} src={arrow} alt="" />
             </button>
             {showFilter === filter.type &&
-            <div className={`sm:flex sm:absolute flex-wrap left-0 mb-5 mt-3 sm:my-0 sm:mx-0 mx-6 font-semibold w-full sm:bg-[#EFEFEF]
+            <div className={`sm:flex sm:absolute flex flex-wrap left-0 mb-5 mt-3 sm:my-0 sm:mx-0 mx-6 font-semibold w-full sm:bg-[#EFEFEF]
                           ${showFilter === 'colors' && 'bg-[#EFEFEF] mt-0 py-2 sm:py-0 mx-auto'}`}>
               {filter.values.map((value) => (
-                  <label key={value} className={`cursor-pointer mx-3 sm:my-2 px-2 sm:pt-[3px] sm:pb-0 pt-2 pb-1}`}>
+                  <label key={value} className={`cursor-pointer mx-3 sm:my-2 px-2 sm:pt-[3px] sm:pb-0 pt-2 pb-1 `}>
                     {showFilter === 'colors' ? 
                       <div className={`sm:h-full sm:w-7 h-6 w-6  inline-block
                         ${value === 'black' || value === 'white' ? 'bg-'+value : 'bg-'+value+'-500'}
