@@ -69,7 +69,9 @@ export default function Products({ products, filters }) {
           product.sizes.includes(size)
         )) &&
       (selectedFilters.colors.length === 0 ||
-        selectedFilters.colors.includes(product.colors));
+        selectedFilters.colors.some((color)  =>
+        product.colors.includes(color)
+      )) 
     return hasSelectedFilters;
   });
 

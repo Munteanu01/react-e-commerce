@@ -21,9 +21,12 @@ export const Filter = (products) => {
         categoriesArr.push(category);
       }
     });
-    if (!colorsArr.includes(product.colors)) {
-      colorsArr.push(product.colors);
-    }
+    product.colors.forEach((color) => {
+      if (!colorsArr.includes(color)) {
+        colorsArr.push(color)
+      }
+    })
+    
   });
   return { sizesArr, colorsArr, categoriesArr };
 };
@@ -36,10 +39,7 @@ export default function Filtering({products, filters, removeFilter, handleFilter
         values: Filter(products)[`${filter.type}Arr`],
       }))
     : [
-        categoriesArr.length > 0 && {
-          type: "categories",
-          values: categoriesArr,
-        },
+        categoriesArr.length > 0 && { type: "categories", values: categoriesArr },
         sizesArr.length > 0 && { type: "sizes", values: sizesArr },
         colorsArr.length > 0 && { type: "colors", values: colorsArr },
       ].filter(Boolean);
@@ -85,20 +85,20 @@ export default function Filtering({products, filters, removeFilter, handleFilter
             </button>
             {showFilter === filter.type &&
             <div className="sm:flex sm:absolute flex-wrap left-0 mb-5 mt-3 sm:my-0 sm:mx-0 mx-6 font-semibold w-full sm:bg-[#EFEFEF]">
-                {filter.values.map((value) => (
-                    <label key={value} className={`cursor-pointer mx-3 sm:my-2 px-2 sm:pt-[3px] sm:pb-0 pt-2 pb-1
-                                                 ${selectedFilters[filter.type].includes(value) ? 'bg-[#EFEFEF] sm:bg-neutral-600 sm:text-white' : ''}`}>
-                     <span>{value.toUpperCase()}</span>
-                     <input
-                       type="checkbox"
-                       name={value}
-                       id={value}
-                       data-filter-type={filter.type}
-                       onChange={handleFilterChange}
-                       checked={selectedFilters[filter.type].includes(value)}
-                       className="hidden"/>
-                    </label>
-                ))}
+              {filter.values.map((value) => (
+                  <label key={value} className={`cursor-pointer mx-3 sm:my-2 px-2 sm:pt-[3px] sm:pb-0 pt-2 pb-1}`}>
+                    {showFilter === 'colors' ? 
+                      <div className={`h-3 w-3 mb-1 inline-block
+                        ${value === 'black' || value === 'white' ? 'bg-'+value : 'bg-'+value+'-500'}`}>
+                      </div>
+                    : <span className={`${selectedFilters[filter.type].includes(value) ? 'bg-[#EFEFEF] sm:bg-neutral-600 sm:text-white' : ''}`}>
+                        {value.replace(/_/g, "-").toUpperCase()}
+                      </span>
+                    }
+                    <input type="checkbox" name={value} id={value} data-filter-type={filter.type} onChange={handleFilterChange}
+                           checked={selectedFilters[filter.type].includes(value)} className="hidden"/>
+                  </label>
+              ))}
             </div>}
           </div>
         ))}
@@ -133,7 +133,7 @@ export default function Filtering({products, filters, removeFilter, handleFilter
          <button key={filter}
            className=" py-2 flex items-center px-2"
            onClick={() => removeFilter(key, filter)}>
-           <p>{label(filter)}</p>
+           <p>{label(filter).replace(/_/g, "-")}</p>
            <img className="w-[16px] ml-[1px] mb-[3px] sm:mb-[4px]" src={filterClose} alt="" />
          </button>
        ))

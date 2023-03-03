@@ -71,7 +71,7 @@ export default function Navbar(props){
 
                     <div className={collectionStates[collection.id] ? "block" : "hidden"}>
                         {collection.categories.map((category) => (
-                            <Link to={`/${collection.slug}/${category.replace(/_/g, "-")}`} onClick={toggleMenu} key={category}>
+                            <Link to={`/${collection.slug}/${category}`} onClick={toggleMenu} key={category}>
                                 <h1 className="pl-5">{category.replace(/_/g, " ").toUpperCase()}</h1>
                             </Link>
                         ))}
