@@ -74,45 +74,21 @@ export default function Products({ products, filters }) {
       )) 
     return hasSelectedFilters;
   });
-  const productsPerPage = 9;
-  const [currentPage, setCurrentPage] = useState(1);
-  const indexOfLastProduct = currentPage * productsPerPage;
-  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-  const currentProducts = filteredProducts.slice(
-    indexOfFirstProduct,
-    indexOfLastProduct
-  );
-  const handleClick = (event) => {
-    setCurrentPage(Number(event.target.id));
-  };
-  const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
+
   return (
     <div className="py-16 mx-5 md:mx-10 max-w-[1600px] justify-center grid 2xl:mx-auto">
-       <Filter removeFilter={removeFilter} products={products} filters={filters} handleFilterChange={handleFilterChange}
-               selectedFilters={selectedFilters} selectedSort={selectedSort} handleSortChange={handleSortChange}/>
+      <Filter removeFilter={removeFilter} products={products} filters={filters} handleFilterChange={handleFilterChange}
+              selectedFilters={selectedFilters} selectedSort={selectedSort} handleSortChange={handleSortChange}/>
       <div className="grid grid-cols-2 md:grid-cols-3 justify-center sm:gap-10 gap-4">
         {filteredProducts.length === 0 ? (
-          <>
-            <img className="xl:max-w-sm flex mx-auto mt-12" src={noResults} alt="" />
-            <p className="sm:text-2xl  text-center break-words items-center ml-auto md:px-10 flex font-extrabold mt-14 leading-8 md:col-span-2">
-              We're sorry, we couldn't find any matching products.
-            </p>
-          </>
+        <>
+          <img className="xl:max-w-sm flex mx-auto mt-12" src={noResults} alt="" />
+          <p className="sm:text-2xl  text-center break-words items-center ml-auto md:px-10 flex font-extrabold mt-14 leading-8 md:col-span-2">We're sorry, we couldn't find any matching products.</p>
+        </>
         ) : (
-          <>
-            {currentProducts.map((product) => (
-              <ProductCard product={product} hasSelectedFilters={true} key={product.id}/>
-            ))}
-            <div className="flex justify-center mt-8">
-              {totalPages > 1 &&
-                [...Array(totalPages).keys()].map((pageNumber) => (
-                  <button key={pageNumber + 1} id={pageNumber + 1} onClick={handleClick} 
-                          className={`border px-3 py-2 mx-1 ${currentPage === pageNumber + 1? "bg-gray-300": "bg-white"}`}>
-                    {pageNumber + 1}
-                  </button>
-                ))}
-            </div>
-          </>
+          filteredProducts.map((product) => (
+            <ProductCard product={product} hasSelectedFilters={true} key={product.id}/>
+          ))
         )}
       </div>
     </div>
