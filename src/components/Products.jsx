@@ -75,6 +75,10 @@ export default function Products({ products, filters }) {
     return hasSelectedFilters;
   });
 
+  useEffect(() => {
+    setSelectedFilters({ categories: [], sizes: [], colors: [] });
+  }, [location.path]);
+
   return (
     <div className="py-16 mx-5 md:mx-10 max-w-[1600px] justify-center grid 2xl:mx-auto">
       <Filter removeFilter={removeFilter} products={products} filters={filters} handleFilterChange={handleFilterChange}

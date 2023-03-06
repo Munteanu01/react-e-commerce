@@ -10,13 +10,10 @@ export default function Navbar(props){
     };
     useEffect(() => {
          setMenuIsOpen(false);
-
         const handlePopstate = () => {
             setMenuIsOpen(false);
         };
-
         window.addEventListener("popstate", handlePopstate);
-
         return () => {
             window.removeEventListener("popstate", handlePopstate);
         };
