@@ -11,8 +11,7 @@ export default function Cart() {
   });
   
   const handleQuantityChange = (id, size, amount) => {
-    const updatedItems = cartItems
-      .map((item) =>
+    const updatedItems = cartItems.map((item) =>
         item.id === id && item.size === size
           ? { ...item, quantity: item.quantity + amount }
           : item

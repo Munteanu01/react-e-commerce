@@ -10,7 +10,7 @@ export default function Searching({search, close}){
     const handleSubmit = (event) => {
         event.preventDefault();
         if (searchQuery.trim() !== '') {
-            const encodedQuery = encodeURIComponent(searchQuery).replace(/%20/g, '+').replace(/%2B/g, '+').toLowerCase();
+            const encodedQuery = encodeURIComponent(searchQuery).replace(/%20/g, '-').replace(/%2B/g, '-').toLowerCase();
             window.location.href = `/search/${encodedQuery}`;
         }
     };

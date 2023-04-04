@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import Filter from "./Filter";
 import ProductCard from "./ProductCard";
 import noResults from '../icons/no-results-2.png'
-import { useLocation } from "react-router-dom";
+
 
 export default function Products({ products, filters }) {
   const [selectedSort, setSelectedSort] = useState("recommended");
@@ -58,7 +59,7 @@ export default function Products({ products, filters }) {
       return updatedFilters;
     });
   };
-
+s
   const filteredProducts = sortedProducts.filter((product) => {
     const hasSelectedFilters =
       (selectedFilters.categories.length === 0 ||
@@ -77,10 +78,10 @@ export default function Products({ products, filters }) {
   });
   
   const location = useLocation();
-
   useEffect(() => {
     setSelectedFilters({ categories: [], sizes: [], colors: [] });
   }, [location.pathname]);
+
   return (
     <div className="py-16 mx-5 md:mx-10 max-w-[1600px] justify-center grid 2xl:mx-auto">
       <Filter removeFilter={removeFilter} products={products} filters={filters} handleFilterChange={handleFilterChange}
