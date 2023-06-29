@@ -59,7 +59,7 @@ export default function Products({ products, filters }) {
       return updatedFilters;
     });
   };
-s
+
   const filteredProducts = sortedProducts.filter((product) => {
     const hasSelectedFilters =
       (selectedFilters.categories.length === 0 ||
