@@ -75,6 +75,7 @@ export default function Navbar(props){
                     </div>
                 </div>
                 ))}
+                <Link to={'/account'} onClick={toggleMenu} className="flex mt-8 sm:mt-12">MY ACCOUNT</Link>
             </div>
         </div>
         
